@@ -95,7 +95,7 @@ const WishesList = () => {
           }`}
           disabled={page === 1}
         >
-          Sebelumnya
+          Previous
         </button>
         <p className="text-xs">
           Page {page} of {totalPages}
@@ -107,7 +107,7 @@ const WishesList = () => {
           }`}
           disabled={page === totalPages}
         >
-          Selanjutnya
+          Next
         </button>
       </div>
     </div>

@@ -9,7 +9,7 @@ const wishSchema = new Schema(
     attendance: {
       type: String,
       required: true,
-      enum: ["Hadir", "Tidak Hadir"],
+      enum: ["Tham dự", "Không tham dự"],
     },
     guests: {
       type: Number,
