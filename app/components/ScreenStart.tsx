@@ -35,22 +35,21 @@ const ScreenStart = () => {
 
   return (
     <div
-      className={` text-white flex flex-col justify-center items-center min-h-screen transition-opacity duration-1000 ${fadeClass}`}
+      className={` text-white flex flex-col justify-center items-center min-h-screen text-center px-6 transition-opacity duration-1000 ${fadeClass}`}
     >
       <TypeAnimation
         sequence={[
           "THE WEDDING OF",
-          2000, 
+          2000,
           config.coupleNames.toUpperCase(),
           1000,
         ]}
         wrapper="span"
         speed={20}
         style={{
-          fontSize: "2em",
           display: "inline-block",
         }}
-        className="font-legan text-sm"
+        className="font-legan text-xl sm:text-2xl md:text-3xl"
         repeat={0} // Animasi terus diulang
       />
     </div>
