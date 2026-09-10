@@ -1,31 +1,31 @@
 import type { Metadata } from "next";
-import { Ovo } from "@next/font/google";
-import localFont from "next/font/local";
+import { Cormorant_Garamond, EB_Garamond, Great_Vibes, Alex_Brush } from "@next/font/google";
 import "./globals.css";
 import { config } from "@/lib/config";
 
-const legan = localFont({
-  src: "./fonts/Legan.woff",
-  variable: "--font-legan",
-  weight: "100 900",
-});
-
-const thesignature = localFont({
-  src: "./fonts/Thesignature.ttf",
-  variable: "--font-thesignature",
-  weight: "100 900",
-});
-
-const wonder = localFont({
-  src: "./fonts/Wonder.woff",
-  variable: "--font-wonder",
-  weight: "100 900",
-});
-
-const ovo = Ovo({
-  weight: "400",
-  subsets: ["latin"],
+// Fonts below all ship a "vietnamese" subset so diacritics (ệ, ầ, ộ, ...) render correctly.
+const ovo = Cormorant_Garamond({
+  weight: ["400", "500", "600"],
+  subsets: ["latin", "vietnamese"],
   variable: "--font-ovo",
+});
+
+const legan = EB_Garamond({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-legan",
+});
+
+const thesignature = Alex_Brush({
+  weight: "400",
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-thesignature",
+});
+
+const wonder = Great_Vibes({
+  weight: "400",
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-wonder",
 });
 
 
