@@ -40,11 +40,10 @@ body {
   background-position: center;
   background-image: url(../public/foto_2.jpg);
   background-repeat: no-repeat;
-  transition: 5s;
   animation-name: animate;
-  animation-direction: alternate-reverse;
+  animation-direction: normal;
   animation-play-state: running;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: steps(1, jump-start);
   animation-duration: 10s;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
