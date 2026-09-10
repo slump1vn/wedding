@@ -352,7 +352,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 {config.holyMatrimony.enabled && (
                   <div className="mt-5 mx-auto flex flex-col items-center">
                     <h3 className="uppercase font-ovo text-sm text-center mt-5 mb-2">
-                      Holy Matrimony <br /> {config.holyMatrimony.time}
+                      Lễ Ăn Hỏi <br /> {config.holyMatrimony.time}
                     </h3>
                     <p className="text-sm text-center  font-legan text-white">
                       {config.holyMatrimony.place} <br /> {config.holyMatrimony.place_details}
@@ -564,7 +564,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
               </div>
 
               <footer className="flex flex-col items-center mt-8">
-                <p className="text-xs">© All rights reserved by petershaan</p>
+                <p className="text-xs">© All rights reserved by Thanh Tú @ Hà Giang</p>
               </footer>
             </div>
           </>
