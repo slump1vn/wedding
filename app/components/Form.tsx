@@ -122,7 +122,7 @@ const Form = () => {
       <div>
         <button
           type="submit"
-          className="block w-full p-2 text-sm font-medium text-center text-black bg-white border border-transparent rounded-md shadow-sm"
+          className="block w-full p-3 text-base font-medium text-center text-black bg-white border border-transparent rounded-md shadow-sm"
           disabled={loading} 
         >
           {loading ? "Đang gửi..." : "Gửi"}

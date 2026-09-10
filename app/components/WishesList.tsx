@@ -55,12 +55,12 @@ const WishesList = () => {
       <div className="flex justify-end mb-4">
         <button
           onClick={handleRefresh}
-          className={`text-sm text-white ${
+          className={`text-sm text-white p-2 -m-2 ${
             loading ? "opacity-50 cursor-not-allowed" : ""
           }`}
           disabled={loading} // Disable while loading
         >
-          {loading ? "Refreshing..." : <IoMdRefresh className="w-6 h-6" />}
+          {loading ? "Refreshing..." : <IoMdRefresh className="w-7 h-7" />}
         </button>
       </div>
 
@@ -90,7 +90,7 @@ const WishesList = () => {
       <div className="flex justify-between mt-8">
         <button
           onClick={handlePreviousPage}
-          className={`text-xs text-white ${
+          className={`text-sm text-white px-3 py-2 -mx-3 -my-2 ${
             page === 1 ? "opacity-50 cursor-not-allowed" : ""
           }`}
           disabled={page === 1}
@@ -102,7 +102,7 @@ const WishesList = () => {
         </p>
         <button
           onClick={handleNextPage}
-          className={`text-xs text-white ${
+          className={`text-sm text-white px-3 py-2 -mx-3 -my-2 ${
             page === totalPages ? "opacity-50 cursor-not-allowed" : ""
           }`}
           disabled={page === totalPages}

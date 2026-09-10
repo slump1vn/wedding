@@ -80,6 +80,9 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
   const { ref: endRef, inView: isEndInView } = useInView({
     threshold: 0.5,
   });
+  const { ref: infoRef, inView: isInfoInView } = useInView({
+    threshold: 0.5,
+  });
 
   useEffect(() => {
     const video = document.querySelector("iframe");
@@ -153,7 +156,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
               </p>
               {!isOpen ? (
                 <button
-                  className="animate-bounce  mt-5 px-5 py-1 uppercase text-xs border border-white hover:text-white hover:bg-transparent rounded-full bg-white text-black transition"
+                  className="animate-bounce  mt-5 px-8 py-3 uppercase text-sm border border-white hover:text-white hover:bg-transparent rounded-full bg-white text-black transition"
                   onClick={handleOpen}
                 >
                   Open Invitation
@@ -216,7 +219,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 <Link
                   href={`https://www.instagram.com/${config.groomInstagram}`}
                   target="_blank"
-                  className="cursor-pointer hover:bg-black text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#4E4E4E] w-fit px-4 py-2 text-[#CCCCCC]"
+                  className="cursor-pointer hover:bg-black text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#4E4E4E] w-fit px-5 py-3 text-[#CCCCCC]"
                 >
                   <FaInstagram /> {config.groomInstagram}
                 </Link>
@@ -246,7 +249,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 <Link
                   href={`https://www.instagram.com/${config.brideInstagram}`}
                   target="_blank"
-                  className="cursor-pointer hover:bg-black text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#4E4E4E] w-fit px-4 py-2 text-[#CCCCCC]"
+                  className="cursor-pointer hover:bg-black text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#4E4E4E] w-fit px-5 py-3 text-[#CCCCCC]"
                 >
                   <FaInstagram /> {config.brideInstagram}
                 </Link>
@@ -360,7 +363,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                     <Link
                       href={config.holyMatrimony.googleMapsLink}
                       target="_blank"
-                      className="cursor-pointer hover:text-white/20 text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#808080] w-fit px-4 py-2 text-white"
+                      className="cursor-pointer hover:text-white/20 text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#808080] w-fit px-5 py-3 text-white"
                     >
                       Google Maps
                     </Link>
@@ -378,7 +381,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                     <Link
                       href={config.weddingReception.googleMapsLink}
                       target="_blank"
-                      className="cursor-pointer hover:text-white/20 text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#808080] w-fit px-4 py-2 text-white"
+                      className="cursor-pointer hover:text-white/20 text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#808080] w-fit px-5 py-3 text-white"
                     >
                       Google Maps
                     </Link>
@@ -445,7 +448,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                   <Link
                     href={config.livestreaming.link}
                     target="_blank"
-                    className="cursor-pointer hover:text-white/20 text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#3B3B3B] w-fit px-6 py-2 text-white"
+                    className="cursor-pointer hover:text-white/20 text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#3B3B3B] w-fit px-6 py-3 text-white"
                   >
                     Join Live Streaming
                   </Link>
@@ -562,8 +565,88 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                   </p>
                 </div>
               </div>
+            </div>
 
-              <footer className="flex flex-col items-center mt-8">
+            {/* SLIDE THÔNG TIN NGÀY GIỜ */}
+            <div className="snap-start text-white h-screen flex flex-col justify-center pt-16 pb-10 px-8 bg-[#0a0a0a]">
+              <div
+                ref={infoRef}
+                className={`${isInfoInView ? "active" : ""} fadeInMove flex-1 flex flex-col justify-center`}
+              >
+                <h1 className="text-2xl text-white font-ovo text-center uppercase mb-6">
+                  Thông Tin Ngày Giờ
+                </h1>
+
+                <div className="flex flex-col gap-y-4">
+                  {config.holyMatrimony.enabled && (
+                    <div className="border border-white/20 rounded-lg p-5 flex flex-col items-center text-center">
+                      <h3 className="uppercase font-ovo text-base mb-2">
+                        Lễ Ăn Hỏi
+                      </h3>
+                      <p className="text-sm font-legan text-white/80">
+                        {config.holyMatrimony.time}
+                      </p>
+                      <p className="text-sm font-legan text-white/80 mt-2">
+                        {config.holyMatrimony.place} <br /> {config.holyMatrimony.place_details}
+                      </p>
+                      <Link
+                        href={config.holyMatrimony.googleMapsLink}
+                        target="_blank"
+                        className="cursor-pointer hover:text-white/20 text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-4 bg-[#808080] w-fit px-5 py-3 text-white"
+                      >
+                        Google Maps
+                      </Link>
+                    </div>
+                  )}
+
+                  {config.weddingReception.enabled && (
+                    <div className="border border-white/20 rounded-lg p-5 flex flex-col items-center text-center">
+                      <h3 className="uppercase font-ovo text-base mb-2">
+                        Tiệc Cưới
+                      </h3>
+                      <p className="text-sm font-legan text-white/80">
+                        {config.weddingReception.time}
+                      </p>
+                      <p className="text-sm font-legan text-white/80 mt-2">
+                        {config.weddingReception.place} <br /> {config.weddingReception.place_details}
+                      </p>
+                      <Link
+                        href={config.weddingReception.googleMapsLink}
+                        target="_blank"
+                        className="cursor-pointer hover:text-white/20 text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-4 bg-[#808080] w-fit px-5 py-3 text-white"
+                      >
+                        Google Maps
+                      </Link>
+                    </div>
+                  )}
+
+                  {config.livestreaming.enabled && (
+                    <div className="border border-white/20 rounded-lg p-5 flex flex-col items-center text-center">
+                      <h3 className="uppercase font-ovo text-base mb-2">
+                        Livestream
+                      </h3>
+                      <p className="text-sm font-legan text-white/80">
+                        {new Date(config.eventDate).toLocaleDateString("en-US", {
+                          weekday: "long",
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                        <br /> {config.livestreaming.time}
+                      </p>
+                      <Link
+                        href={config.livestreaming.link}
+                        target="_blank"
+                        className="cursor-pointer hover:text-white/20 text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-4 bg-[#3B3B3B] w-fit px-5 py-3 text-white"
+                      >
+                        Join Live Streaming
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <footer className="flex flex-col items-center mt-6">
                 <p className="text-xs">© All rights reserved by Thanh Tú @ Hà Giang</p>
               </footer>
             </div>
