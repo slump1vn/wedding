@@ -94,7 +94,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
 
   return (
     <div
-      className={`h-screen w-screen flex flex-col md:flex-row ${fadeClass} transition-opacity duration-1000`}
+      className={`wedding-screen h-screen w-screen flex flex-col md:flex-row ${fadeClass} transition-opacity duration-1000`}
     >
       {/* Gambar sisi kiri Wide Untuk Komputer */}
       <div
@@ -564,9 +564,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
               </div>
 
               <footer className="flex flex-col items-center mt-8">
-                <p className="text-[0.5rem] uppercase text-center">
-                  Created By Peter Shaan
-                </p>
                 <p className="text-xs">© All rights reserved by petershaan</p>
               </footer>
             </div>

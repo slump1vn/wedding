@@ -106,3 +106,22 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Outline dark text-shadow so white text stays legible over bright/white areas of background photos */
+.wedding-screen .text-white,
+.wedding-screen [class*="text-white/"] {
+  text-shadow:
+    -1px -1px 2px rgba(0, 0, 0, 0.65),
+     1px -1px 2px rgba(0, 0, 0, 0.65),
+    -1px  1px 2px rgba(0, 0, 0, 0.65),
+     1px  1px 2px rgba(0, 0, 0, 0.65),
+     0px  0px 4px rgba(0, 0, 0, 0.45);
+}
+
+/* Buttons already sit on solid fills; keep their text crisp */
+.wedding-screen button.text-white,
+.wedding-screen button .text-white,
+.wedding-screen a.text-white,
+.wedding-screen a .text-white {
+  text-shadow: none;
+}
