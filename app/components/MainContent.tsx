@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { IoIosArrowUp } from "react-icons/io";
-import { FaInstagram } from "react-icons/fa";
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 import CountdownTimer from "./Countdown";
@@ -41,14 +40,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
   });
 
   const { ref: main2Ref, inView: isMain2InView } = useInView({
-    threshold: 0.5,
-  });
-
-  const { ref: slide2Ref, inView: isSlide2InView } = useInView({
-    threshold: 0.5,
-  });
-
-  const { ref: slide3Ref, inView: isSlide3InView } = useInView({
     threshold: 0.5,
   });
 
@@ -180,67 +171,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
         </div>
         {isOpen && (
           <>
-            {/* Slide 2 */}
-            <div
-              className={`text-white h-dvh flex items-end pb-16 px-12 snap-start `}
-              style={{
-                backgroundImage: `url(/slide_2.jpg)`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              {/* Display the content when the button is clicked */}
-              <div
-                ref={slide2Ref}
-                className={`fadeInMove ${isSlide2InView ? "active" : ""}  `}
-              >
-                <p className="font-legan text-lg my-2">Chú Rể</p>
-                <h1 className="text-3xl md:text-5xl text-white  font-ovo">
-                  {config.groom}
-                </h1>
-                <h3 className="font-thesignature text-4xl">Đôi nét về {config.groomNickName},</h3>
-                <p className="text-lg mt-5 font-legan text-[#CCCCCC]">
-                  {config.groomBio}
-                </p>
-                <Link
-                  href={`https://www.instagram.com/${config.groomInstagram}`}
-                  target="_blank"
-                  className="cursor-pointer hover:bg-black text-lg rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#4E4E4E] w-fit px-5 py-3 text-[#CCCCCC]"
-                >
-                  <FaInstagram /> {config.groomInstagram}
-                </Link>
-              </div>
-            </div>
-            {/* Slide 3 */}
-            <div
-              className="snap-start  text-white h-dvh flex items-end pb-16 px-12 "
-              style={{
-                backgroundImage: `url(/slide_3.jpg)`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              <div
-                ref={slide3Ref}
-                className={`fadeInMove ${isSlide3InView ? "active" : ""}  `}
-              >
-                <p className="font-legan text-lg my-2">Cô Dâu</p>
-                <h1 className="text-3xl md:text-5xl text-white  font-ovo">
-                  {config.bride}
-                </h1>
-                <h3 className="font-thesignature text-4xl">Đôi nét về {config.brideNickName},</h3>
-                <p className="text-lg mt-5 font-legan text-[#CCCCCC]">
-                  {config.brideBio}
-                </p>
-                <Link
-                  href={`https://www.instagram.com/${config.brideInstagram}`}
-                  target="_blank"
-                  className="cursor-pointer hover:bg-black text-lg rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#4E4E4E] w-fit px-5 py-3 text-[#CCCCCC]"
-                >
-                  <FaInstagram /> {config.brideInstagram}
-                </Link>
-              </div>
-            </div>
             {/* Slide 5 */}
             <div
               className="snap-start  text-white h-dvh flex flex-col items-center px-12 "
