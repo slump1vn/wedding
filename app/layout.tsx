@@ -31,7 +31,7 @@ const wonder = Great_Vibes({
 
 export const metadata: Metadata = {
   title: `The Wedding of ${config.coupleNames}`,
-  description: `Wedding Invitation of ${config.coupleNames}, made by Peter Shaan`,
+  description: `Wedding Invitation of ${config.coupleNames}`,
 };
 
 export default function RootLayout({

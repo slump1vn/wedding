@@ -158,7 +158,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                     {name ? `Dear ${name},` : "Welcome"}
                   </p>
                   <button
-                    className="btn-glow animate-bounce px-12 py-5 uppercase text-lg font-medium tracking-wide border-2 border-white hover:text-white hover:bg-transparent rounded-full bg-white text-black transition"
+                    className="btn-glow animate-bounce px-12 py-5 uppercase text-lg font-medium tracking-wide border-2 border-white backdrop-blur-md bg-white/30 hover:bg-white/50 text-black transition rounded-full"
                     onClick={handleOpen}
                   >
                     Mở Thiệp Mời
