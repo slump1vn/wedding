@@ -60,19 +60,19 @@ const WishesList = () => {
           }`}
           disabled={loading} // Disable while loading
         >
-          {loading ? "Refreshing..." : <IoMdRefresh className="w-7 h-7" />}
+          {loading ? "Đang làm mới..." : <IoMdRefresh className="w-7 h-7" />}
         </button>
       </div>
 
       <div className="max-h-[500px] overflow-y-auto">
         {wishes.length === 0 ? (
-          <p>No wishes available</p>
+          <p>Chưa có lời chúc nào</p>
         ) : (
           wishes.map((wish) => (
             <div key={wish._id} className="mb-4">
               <p className="font-bold font-legan">{wish.name}</p>
               <p className="text-base my-2 opacity-50">
-                {new Date(wish.createdAt).toLocaleString("en-US", {
+                {new Date(wish.createdAt).toLocaleString("vi-VN", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
@@ -95,10 +95,10 @@ const WishesList = () => {
           }`}
           disabled={page === 1}
         >
-          Previous
+          Trước
         </button>
         <p className="text-sm">
-          Page {page} of {totalPages}
+          Trang {page}/{totalPages}
         </p>
         <button
           onClick={handleNextPage}
@@ -107,7 +107,7 @@ const WishesList = () => {
           }`}
           disabled={page === totalPages}
         >
-          Next
+          Tiếp
         </button>
       </div>
     </div>

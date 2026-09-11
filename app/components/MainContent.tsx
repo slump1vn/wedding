@@ -123,12 +123,20 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
         >
           <div className="text-center p-5 flex flex-col h-full py-20">
             <div className="gap-y-2 md:gap-y-4 flex flex-col">
+              {name && (
+                <h5
+                  className={`text-base font-legan text-white uppercase tracking-wide fadeMain2 ${isMain2InView ? "active" : ""
+                    } `}
+                >
+                  Kính gửi {name},
+                </h5>
+              )}
               <h5
                 className={`text-base font-legan text-white uppercase tracking-wide fadeMain2 ${isMain2InView ? "active" : ""
                   } `}
                 ref={main2Ref}
               >
-                The Wedding Of
+                Lễ Cưới Của
               </h5>
               <h1
                 className={`text-2xl sm:text-3xl md:text-4xl font-ovo t text-white uppercase fadeMain ${isMainInView ? "active" : ""
@@ -142,7 +150,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                   } `}
                 ref={main2Ref}
               >
-                {new Date(config.eventDate).toLocaleDateString("en-US", {
+                {new Date(config.eventDate).toLocaleDateString("vi-VN", {
                   weekday: "long",
                   year: "numeric",
                   month: "long",
@@ -155,7 +163,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
               {!isOpen && (
                 <>
                   <p className="text-xl uppercase font-xs tracking-widest text-white mb-6">
-                    {name ? `Dear ${name},` : "Welcome"}
+                    {name ? `Kính gửi ${name},` : "Chào Mừng"}
                   </p>
                   <button
                     className="btn-glow animate-bounce px-12 py-5 uppercase text-lg font-medium tracking-wide border-2 border-white backdrop-blur-md bg-white/30 hover:bg-white/50 text-black transition rounded-full"
@@ -215,11 +223,11 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 ref={slide2Ref}
                 className={`fadeInMove ${isSlide2InView ? "active" : ""}  `}
               >
-                <p className="font-legan text-base my-2">The Groom</p>
+                <p className="font-legan text-base my-2">Chú Rể</p>
                 <h1 className="text-2xl md:text-4xl text-white  font-ovo">
                   {config.groom}
                 </h1>
-                <h3 className="font-thesignature text-3xl">About {config.groomNickName},</h3>
+                <h3 className="font-thesignature text-3xl">Đôi nét về {config.groomNickName},</h3>
                 <p className="text-base mt-5 font-legan text-[#CCCCCC]">
                   {config.groomBio}
                 </p>
@@ -245,11 +253,11 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 ref={slide3Ref}
                 className={`fadeInMove ${isSlide3InView ? "active" : ""}  `}
               >
-                <p className="font-legan text-base my-2">The Bride</p>
+                <p className="font-legan text-base my-2">Cô Dâu</p>
                 <h1 className="text-2xl md:text-4xl text-white  font-ovo">
                   {config.bride}
                 </h1>
-                <h3 className="font-thesignature text-3xl">About {config.brideNickName},</h3>
+                <h3 className="font-thesignature text-3xl">Đôi nét về {config.brideNickName},</h3>
                 <p className="text-base mt-5 font-legan text-[#CCCCCC]">
                   {config.brideBio}
                 </p>
@@ -277,7 +285,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                   className={`text-2xl md:text-6xl  text-white font-ovo fadeInMove ${isSlide4InView ? " active" : ""
                     }`}
                 >
-                  A journey in love
+                  Hành Trình Tình Yêu
                 </h1>
                 <h3
                   ref={slide4Ref}
@@ -348,12 +356,12 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                   }  fadeInMove flex items-center flex-col pt-32 `}
               >
                 <h3 className="uppercase font-legan text-sm tracking-wide mt-5 mb-2">
-                  save our date
+                  lưu lại ngày cưới
                 </h3>
                 <h1 className="text-2xl sm:text-3xl w-[200px] sm:w-[260px] text-center text-white  font-ovo uppercase">
-                  {new Date(config.eventDate).toLocaleDateString("en-US", {
+                  {new Date(config.eventDate).toLocaleDateString("vi-VN", {
                     weekday: "long",
-                  })} <br />  {new Date(config.eventDate).toLocaleDateString("en-US", {
+                  })} <br />  {new Date(config.eventDate).toLocaleDateString("vi-VN", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -380,7 +388,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 {config.weddingReception.enabled && (
                   <div className="mt-5 mx-auto flex  flex-col items-center">
                     <h3 className="uppercase font-ovo text-base text-center mt-5 mb-2">
-                      Wedding Reception <br /> {config.weddingReception.time}
+                      Tiệc Cưới <br /> {config.weddingReception.time}
                     </h3>
                     <p className="text-base text-center  font-legan text-white">
                       {config.weddingReception.place} <br /> {config.weddingReception.place_details}
@@ -411,7 +419,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                   }  fadeInMove flex items-center flex-col`}
               >
                 <h1 className="text-3xl text-center text-white  font-ovo">
-                  ALMOST TIME FOR OURCELEBRATION
+                  SẮP ĐẾN NGÀY VUI CỦA CHÚNG TÔI
                 </h1>
                 {/* Countdown Timer */}
                 <CountdownTimer />
@@ -432,7 +440,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                   className={`text-3xl text-white  font-ovo fadeInMoveSlow ${isSlide7InView ? "active" : ""
                     }`}
                 >
-                  JOIN OUR EXCLUSIVE LIVE STREAMING EVENT
+                  THAM GIA SỰ KIỆN PHÁT TRỰC TIẾP CÙNG CHÚNG TÔI
                 </h1>
 
                 <div
@@ -441,7 +449,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                   ref={slide7Ref}
                 >
                   <h3 className="uppercase font-ovo text-base mt-5 mb-2">
-                    {new Date(config.eventDate).toLocaleDateString("en-US", {
+                    {new Date(config.eventDate).toLocaleDateString("vi-VN", {
                       weekday: "long",
                       year: "numeric",
                       month: "long",
@@ -457,7 +465,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                     target="_blank"
                     className="cursor-pointer hover:text-white/20 text-base rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#3B3B3B] w-fit px-6 py-3 text-white"
                   >
-                    Join Live Streaming
+                    Xem Trực Tiếp
                   </Link>
                 </div>
               </div>)}
@@ -476,7 +484,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                   className={`${isSlide8InView ? "active" : ""} fadeInMove `}
                 >
                   <h1 className="text-3xl text-white  font-ovo text-center uppercase">
-                    Unveiling Our Prewedding Story
+                    Câu Chuyện Prewedding Của Chúng Tôi
                   </h1>
                   <div
                     className="mt-10 mx-auto w-full max-w-2xl relative"
@@ -515,7 +523,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 className={`${isSlide9InView ? "active" : ""} fadeInMove`}
               >
                 <h1 className="text-3xl sm:text-4xl text-white font-ovo text-center uppercase mb-1">
-                  RSVP AND WISHES
+                  XÁC NHẬN THAM DỰ & LỜI CHÚC
                 </h1>
                 <p className="text-base font-legan text-white/80 text-center">
                 {config.rsvp.detail}
@@ -540,7 +548,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 className={`${isSlide10InView ? "active" : ""} fadeInMove`}
               >
                 <h1 className="text-4xl text-white font-ovo text-center uppercase">
-                  Wishes
+                  Lời Chúc
                 </h1>
                 <WishesList />
               </div>
@@ -630,10 +638,10 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                   {config.livestreaming.enabled && (
                     <div className="border border-white/20 rounded-lg p-5 flex flex-col items-center text-center">
                       <h3 className="uppercase font-ovo text-lg mb-2">
-                        Livestream
+                        Trực Tiếp
                       </h3>
                       <p className="text-base font-legan text-white/80">
-                        {new Date(config.eventDate).toLocaleDateString("en-US", {
+                        {new Date(config.eventDate).toLocaleDateString("vi-VN", {
                           weekday: "long",
                           year: "numeric",
                           month: "long",
@@ -646,7 +654,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                         target="_blank"
                         className="cursor-pointer hover:text-white/20 text-base rounded-full flex items-center gap-x-2 text-center font-legan mt-4 bg-[#3B3B3B] w-fit px-5 py-3 text-white"
                       >
-                        Join Live Streaming
+                        Xem Trực Tiếp
                       </Link>
                     </div>
                   )}
@@ -654,7 +662,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
               </div>
 
               <footer className="flex flex-col items-center mt-6">
-                <p className="text-sm">© All rights reserved by Thanh Tú @ Hà Giang</p>
+                <p className="text-sm">© Bản quyền thuộc về Thanh Tú & Hà Giang</p>
               </footer>
             </div>
           </>
