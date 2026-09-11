@@ -49,7 +49,7 @@ const ScreenStart = () => {
         style={{
           display: "inline-block",
         }}
-        className="font-legan text-xl sm:text-3xl md:text-4xl"
+        className="font-legan text-xl sm:text-4xl md:text-5xl"
         repeat={0} // Animasi terus diulang
       />
     </div>

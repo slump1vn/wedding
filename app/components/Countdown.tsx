@@ -40,20 +40,20 @@ const CountdownTimer = () => {
   return (
     <div className="flex space-x-4 mt-5 text-center font-legan">
       <div className="flex flex-col">
-        <span className="text-5xl font-bold">{timeLeft.days}</span>
-        <span className="text-base uppercase">Ngày</span>
+        <span className="text-6xl font-bold">{timeLeft.days}</span>
+        <span className="text-lg uppercase">Ngày</span>
       </div>
       <div className="flex flex-col">
-        <span className="text-5xl font-bold">{timeLeft.hours}</span>
-        <span className="text-base uppercase">Giờ</span>
+        <span className="text-6xl font-bold">{timeLeft.hours}</span>
+        <span className="text-lg uppercase">Giờ</span>
       </div>
       <div className="flex flex-col">
-        <span className="text-5xl font-bold">{timeLeft.minutes}</span>
-        <span className="text-base uppercase">Phút</span>
+        <span className="text-6xl font-bold">{timeLeft.minutes}</span>
+        <span className="text-lg uppercase">Phút</span>
       </div>
       <div className="flex flex-col">
-        <span className="text-5xl font-bold">{timeLeft.seconds}</span>
-        <span className="text-base uppercase">Giây</span>
+        <span className="text-6xl font-bold">{timeLeft.seconds}</span>
+        <span className="text-lg uppercase">Giây</span>
       </div>
     </div>
   );
