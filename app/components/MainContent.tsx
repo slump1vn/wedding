@@ -44,10 +44,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
     threshold: 0.5,
   });
 
-  const { ref: slide1Ref, inView: isSlide1InView } = useInView({
-    threshold: 0.5,
-  });
-
   const { ref: slide2Ref, inView: isSlide2InView } = useInView({
     threshold: 0.5,
   });
@@ -56,9 +52,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
     threshold: 0.5,
   });
 
-  const { ref: slide4Ref, inView: isSlide4InView } = useInView({
-    threshold: 0.5,
-  });
   const { ref: slide5Ref, inView: isSlide5InView } = useInView({
     threshold: 0.5,
   });
@@ -187,28 +180,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
         </div>
         {isOpen && (
           <>
-            {/* Slide 1 */}
-            <div
-              className={`text-white h-screen flex pt-12 p-5 px-12 snap-start `}
-              style={{
-                backgroundImage: `url(/slide_1.jpg)`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              <div
-                ref={slide1Ref}
-                className={` ${isSlide1InView ? "active" : ""}  fadeInMove`}
-              >
-                <h1 className="text-xl md:text-3xl font-ovo tracking-wide text-white uppercase">
-                  {config.bibleVerse}
-                </h1>
-                <p className="text-base mt-5 font-legan">
-                  {config.bibleVerseContent}
-                </p>
-                <p className="text-6xl mt-5 font-wonder">{config.coupleNames}</p>
-              </div>
-            </div>
             {/* Slide 2 */}
             <div
               className={`text-white h-screen flex items-end pb-16 px-12 snap-start `}
@@ -270,77 +241,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 </Link>
               </div>
             </div>
-            {/* Slide 4 */}
-            <div
-              className="snap-start  text-white h-screen pt-8 flex px-12 "
-              style={{
-                backgroundImage: `url(/slide_4.jpg)`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              <div>
-                <h1
-                  ref={slide4Ref}
-                  className={`text-2xl md:text-6xl  text-white font-ovo fadeInMove ${isSlide4InView ? " active" : ""
-                    }`}
-                >
-                  Hành Trình Tình Yêu
-                </h1>
-                <h3
-                  ref={slide4Ref}
-                  className={`uppercase font-legan text-2xl mt-5 mb-2 fadeInMoveSlow ${isSlide4InView ? " active" : ""
-                    }`}
-                >
-                  {config.timeline_1}
-                </h3>
-                <p
-                  ref={slide4Ref}
-                  className={`text-sm font-legan text-white fadeInLeftSlow ${isSlide4InView ? "active" : ""
-                    }`}
-                >
-                  {config.timeline_1_content}
-                </p>
-                <h3
-                  ref={slide4Ref}
-                  className={`uppercase font-legan text-2xl mt-5 mb-2 fadeInMoveSlow ${isSlide4InView ? " active" : ""
-                    }`}
-                >
-                  {config.timeline_2}
-                </h3>
-                <p
-                  ref={slide4Ref}
-                  className={`text-sm font-legan text-white fadeInLeftSlow ${isSlide4InView ? " active" : ""
-                    }`}
-                >
-                  {config.timeline_2_content}
-                </p>
-                <h3
-                  ref={slide4Ref}
-                  className={`uppercase font-legan text-2xl mt-5 mb-2 fadeInMoveSlow ${isSlide4InView ? " active" : ""
-                    }`}
-                >
-                  {config.timeline_3}
-                </h3>
-                <p
-                  ref={slide4Ref}
-                  className={`text-sm font-legan text-white fadeInLeftSlow ${isSlide4InView ? " active" : ""
-                    }`}
-                >
-                  {config.timeline_3_content}
-                </p>
-                <div
-                  ref={slide4Ref}
-                  className={`relative flex items-center mt-5 fadeInLeft ${isSlide4InView ? " active" : ""
-                    }`}
-                >
-                  <hr className="w-[120px] mx-2 border-t border-gray-300" />
-                  <span className="px-2 font-thesignature text-4xl">
-                    {config.coupleNames}
-                  </span>
-                </div>
-              </div>
-            </div>
             {/* Slide 5 */}
             <div
               className="snap-start  text-white h-screen flex flex-col items-center px-12 "
@@ -368,8 +268,8 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                   })}
                 </h1>
                 {config.holyMatrimony.enabled && (
-                  <div className="mt-5 mx-auto flex flex-col items-center">
-                    <h3 className="uppercase font-ovo text-base text-center mt-5 mb-2">
+                  <div className="mt-5 mx-auto flex flex-col items-center bg-black/55 rounded-xl p-4 backdrop-blur-sm">
+                    <h3 className="uppercase font-ovo text-base text-center mb-2">
                       Lễ Ăn Hỏi <br /> {config.holyMatrimony.time}
                     </h3>
                     <p className="text-base text-center  font-legan text-white">
@@ -386,8 +286,8 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 )}
 
                 {config.weddingReception.enabled && (
-                  <div className="mt-5 mx-auto flex  flex-col items-center">
-                    <h3 className="uppercase font-ovo text-base text-center mt-5 mb-2">
+                  <div className="mt-5 mx-auto flex  flex-col items-center bg-black/55 rounded-xl p-4 backdrop-blur-sm">
+                    <h3 className="uppercase font-ovo text-base text-center mb-2">
                       Tiệc Cưới <br /> {config.weddingReception.time}
                     </h3>
                     <p className="text-base text-center  font-legan text-white">
