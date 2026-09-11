@@ -126,3 +126,20 @@ body {
 .wedding-screen a .text-white {
   text-shadow: none;
 }
+
+/* Pulsing glow ring to draw attention to the main call-to-action button */
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+.btn-glow {
+  animation: glowPulse 2.2s ease-out infinite;
+}

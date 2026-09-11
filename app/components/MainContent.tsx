@@ -109,7 +109,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
         }}
       >
         <div
-          className={`bottom-10 left-20 font-ovo text-lg text-white tracking-[5px] uppercase`}
+          className={`bottom-10 left-20 font-ovo text-xl text-white tracking-[5px] uppercase`}
         >
           {config.coupleNames}
         </div>
@@ -121,24 +121,24 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
           id="backgroundWedding"
           className=" snap-start  w-full h-screen flex items-center justify-center "
         >
-          <div className="text-center p-5 flex flex-col h-full justify-between py-20">
+          <div className="text-center p-5 flex flex-col h-full py-20">
             <div className="gap-y-2 md:gap-y-4 flex flex-col">
               <h5
-                className={`text-sm font-legan text-white uppercase tracking-wide fadeMain2 ${isMain2InView ? "active" : ""
+                className={`text-base font-legan text-white uppercase tracking-wide fadeMain2 ${isMain2InView ? "active" : ""
                   } `}
                 ref={main2Ref}
               >
                 The Wedding Of
               </h5>
               <h1
-                className={`text-xl sm:text-2xl md:text-3xl font-ovo t text-white uppercase fadeMain ${isMainInView ? "active" : ""
+                className={`text-2xl sm:text-3xl md:text-4xl font-ovo t text-white uppercase fadeMain ${isMainInView ? "active" : ""
                   } `}
                 ref={mainRef}
               >
                 {config.coupleNames}
               </h1>
               <h5
-                className={`text-sm  font-legan text-white uppercase tracking-wide  fadeMain2 ${isMain2InView ? "active" : ""
+                className={`text-base  font-legan text-white uppercase tracking-wide  fadeMain2 ${isMain2InView ? "active" : ""
                   } `}
                 ref={main2Ref}
               >
@@ -150,21 +150,28 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 })}
               </h5>
             </div>
+
+            <div className="flex-1 flex flex-col items-center justify-center">
+              {!isOpen && (
+                <>
+                  <p className="text-xl uppercase font-xs tracking-widest text-white mb-6">
+                    {name ? `Dear ${name},` : "Welcome"}
+                  </p>
+                  <button
+                    className="btn-glow animate-bounce px-12 py-5 uppercase text-lg font-medium tracking-wide border-2 border-white hover:text-white hover:bg-transparent rounded-full bg-white text-black transition"
+                    onClick={handleOpen}
+                  >
+                    Mở Thiệp Mời
+                  </button>
+                </>
+              )}
+            </div>
+
             <div>
-              <p className="mt-5 text-lg uppercase font-xs tracking-widest text-white">
-                {name ? `Dear ${name},` : "Welcome"}
-              </p>
-              {!isOpen ? (
-                <button
-                  className="animate-bounce  mt-5 px-8 py-3 uppercase text-sm border border-white hover:text-white hover:bg-transparent rounded-full bg-white text-black transition"
-                  onClick={handleOpen}
-                >
-                  Open Invitation
-                </button>
-              ) : (
+              {isOpen && (
                 <IoIosArrowUp
                   stroke="4"
-                  className="mx-auto mt-20 animate-upDown text-white"
+                  className="mx-auto animate-upDown text-white"
                 />
               )}
             </div>
@@ -185,10 +192,10 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 ref={slide1Ref}
                 className={` ${isSlide1InView ? "active" : ""}  fadeInMove`}
               >
-                <h1 className="text-xl md:text-2xl font-ovo tracking-wide text-white uppercase">
+                <h1 className="text-xl md:text-3xl font-ovo tracking-wide text-white uppercase">
                   {config.bibleVerse}
                 </h1>
-                <p className="text-sm mt-5 font-legan">
+                <p className="text-base mt-5 font-legan">
                   {config.bibleVerseContent}
                 </p>
                 <p className="text-6xl mt-5 font-wonder">{config.coupleNames}</p>
@@ -208,18 +215,18 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 ref={slide2Ref}
                 className={`fadeInMove ${isSlide2InView ? "active" : ""}  `}
               >
-                <p className="font-legan text-sm my-2">The Groom</p>
-                <h1 className="text-xl md:text-3xl text-white  font-ovo">
+                <p className="font-legan text-base my-2">The Groom</p>
+                <h1 className="text-2xl md:text-4xl text-white  font-ovo">
                   {config.groom}
                 </h1>
-                <h3 className="font-thesignature text-2xl">About {config.groomNickName},</h3>
-                <p className="text-sm mt-5 font-legan text-[#CCCCCC]">
+                <h3 className="font-thesignature text-3xl">About {config.groomNickName},</h3>
+                <p className="text-base mt-5 font-legan text-[#CCCCCC]">
                   {config.groomBio}
                 </p>
                 <Link
                   href={`https://www.instagram.com/${config.groomInstagram}`}
                   target="_blank"
-                  className="cursor-pointer hover:bg-black text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#4E4E4E] w-fit px-5 py-3 text-[#CCCCCC]"
+                  className="cursor-pointer hover:bg-black text-base rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#4E4E4E] w-fit px-5 py-3 text-[#CCCCCC]"
                 >
                   <FaInstagram /> {config.groomInstagram}
                 </Link>
@@ -238,18 +245,18 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 ref={slide3Ref}
                 className={`fadeInMove ${isSlide3InView ? "active" : ""}  `}
               >
-                <p className="font-legan text-sm my-2">The Bride</p>
-                <h1 className="text-xl md:text-3xl text-white  font-ovo">
+                <p className="font-legan text-base my-2">The Bride</p>
+                <h1 className="text-2xl md:text-4xl text-white  font-ovo">
                   {config.bride}
                 </h1>
-                <h3 className="font-thesignature text-2xl">About {config.brideNickName},</h3>
-                <p className="text-sm mt-5 font-legan text-[#CCCCCC]">
+                <h3 className="font-thesignature text-3xl">About {config.brideNickName},</h3>
+                <p className="text-base mt-5 font-legan text-[#CCCCCC]">
                   {config.brideBio}
                 </p>
                 <Link
                   href={`https://www.instagram.com/${config.brideInstagram}`}
                   target="_blank"
-                  className="cursor-pointer hover:bg-black text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#4E4E4E] w-fit px-5 py-3 text-[#CCCCCC]"
+                  className="cursor-pointer hover:bg-black text-base rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#4E4E4E] w-fit px-5 py-3 text-[#CCCCCC]"
                 >
                   <FaInstagram /> {config.brideInstagram}
                 </Link>
@@ -267,49 +274,49 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
               <div>
                 <h1
                   ref={slide4Ref}
-                  className={`text-xl md:text-5xl  text-white font-ovo fadeInMove ${isSlide4InView ? " active" : ""
+                  className={`text-2xl md:text-6xl  text-white font-ovo fadeInMove ${isSlide4InView ? " active" : ""
                     }`}
                 >
                   A journey in love
                 </h1>
                 <h3
                   ref={slide4Ref}
-                  className={`uppercase font-legan text-xl mt-5 mb-2 fadeInMoveSlow ${isSlide4InView ? " active" : ""
+                  className={`uppercase font-legan text-2xl mt-5 mb-2 fadeInMoveSlow ${isSlide4InView ? " active" : ""
                     }`}
                 >
                   {config.timeline_1}
                 </h3>
                 <p
                   ref={slide4Ref}
-                  className={`text-xs font-legan text-white fadeInLeftSlow ${isSlide4InView ? "active" : ""
+                  className={`text-sm font-legan text-white fadeInLeftSlow ${isSlide4InView ? "active" : ""
                     }`}
                 >
                   {config.timeline_1_content}
                 </p>
                 <h3
                   ref={slide4Ref}
-                  className={`uppercase font-legan text-xl mt-5 mb-2 fadeInMoveSlow ${isSlide4InView ? " active" : ""
+                  className={`uppercase font-legan text-2xl mt-5 mb-2 fadeInMoveSlow ${isSlide4InView ? " active" : ""
                     }`}
                 >
                   {config.timeline_2}
                 </h3>
                 <p
                   ref={slide4Ref}
-                  className={`text-xs font-legan text-white fadeInLeftSlow ${isSlide4InView ? " active" : ""
+                  className={`text-sm font-legan text-white fadeInLeftSlow ${isSlide4InView ? " active" : ""
                     }`}
                 >
                   {config.timeline_2_content}
                 </p>
                 <h3
                   ref={slide4Ref}
-                  className={`uppercase font-legan text-xl mt-5 mb-2 fadeInMoveSlow ${isSlide4InView ? " active" : ""
+                  className={`uppercase font-legan text-2xl mt-5 mb-2 fadeInMoveSlow ${isSlide4InView ? " active" : ""
                     }`}
                 >
                   {config.timeline_3}
                 </h3>
                 <p
                   ref={slide4Ref}
-                  className={`text-xs font-legan text-white fadeInLeftSlow ${isSlide4InView ? " active" : ""
+                  className={`text-sm font-legan text-white fadeInLeftSlow ${isSlide4InView ? " active" : ""
                     }`}
                 >
                   {config.timeline_3_content}
@@ -320,7 +327,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                     }`}
                 >
                   <hr className="w-[120px] mx-2 border-t border-gray-300" />
-                  <span className="px-2 font-thesignature text-3xl">
+                  <span className="px-2 font-thesignature text-4xl">
                     {config.coupleNames}
                   </span>
                 </div>
@@ -340,10 +347,10 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 className={` ${isSlide5InView ? "active" : ""
                   }  fadeInMove flex items-center flex-col pt-32 `}
               >
-                <h3 className="uppercase font-legan text-xs tracking-wide mt-5 mb-2">
+                <h3 className="uppercase font-legan text-sm tracking-wide mt-5 mb-2">
                   save our date
                 </h3>
-                <h1 className="text-2xl w-[200px] text-center text-white  font-ovo uppercase">
+                <h1 className="text-2xl sm:text-3xl w-[200px] sm:w-[260px] text-center text-white  font-ovo uppercase">
                   {new Date(config.eventDate).toLocaleDateString("en-US", {
                     weekday: "long",
                   })} <br />  {new Date(config.eventDate).toLocaleDateString("en-US", {
@@ -354,16 +361,16 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 </h1>
                 {config.holyMatrimony.enabled && (
                   <div className="mt-5 mx-auto flex flex-col items-center">
-                    <h3 className="uppercase font-ovo text-sm text-center mt-5 mb-2">
+                    <h3 className="uppercase font-ovo text-base text-center mt-5 mb-2">
                       Lễ Ăn Hỏi <br /> {config.holyMatrimony.time}
                     </h3>
-                    <p className="text-sm text-center  font-legan text-white">
+                    <p className="text-base text-center  font-legan text-white">
                       {config.holyMatrimony.place} <br /> {config.holyMatrimony.place_details}
                     </p>
                     <Link
                       href={config.holyMatrimony.googleMapsLink}
                       target="_blank"
-                      className="cursor-pointer hover:text-white/20 text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#808080] w-fit px-5 py-3 text-white"
+                      className="cursor-pointer hover:text-white/20 text-base rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#808080] w-fit px-5 py-3 text-white"
                     >
                       Google Maps
                     </Link>
@@ -372,16 +379,16 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
 
                 {config.weddingReception.enabled && (
                   <div className="mt-5 mx-auto flex  flex-col items-center">
-                    <h3 className="uppercase font-ovo text-sm text-center mt-5 mb-2">
+                    <h3 className="uppercase font-ovo text-base text-center mt-5 mb-2">
                       Wedding Reception <br /> {config.weddingReception.time}
                     </h3>
-                    <p className="text-sm text-center  font-legan text-white">
+                    <p className="text-base text-center  font-legan text-white">
                       {config.weddingReception.place} <br /> {config.weddingReception.place_details}
                     </p>
                     <Link
                       href={config.weddingReception.googleMapsLink}
                       target="_blank"
-                      className="cursor-pointer hover:text-white/20 text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#808080] w-fit px-5 py-3 text-white"
+                      className="cursor-pointer hover:text-white/20 text-base rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#808080] w-fit px-5 py-3 text-white"
                     >
                       Google Maps
                     </Link>
@@ -403,7 +410,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 className={` ${isSlide6InView ? "active" : ""
                   }  fadeInMove flex items-center flex-col`}
               >
-                <h1 className="text-2xl text-center text-white  font-ovo">
+                <h1 className="text-3xl text-center text-white  font-ovo">
                   ALMOST TIME FOR OURCELEBRATION
                 </h1>
                 {/* Countdown Timer */}
@@ -422,7 +429,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
               >
                 <h1
                   ref={slide7Ref}
-                  className={`text-2xl text-white  font-ovo fadeInMoveSlow ${isSlide7InView ? "active" : ""
+                  className={`text-3xl text-white  font-ovo fadeInMoveSlow ${isSlide7InView ? "active" : ""
                     }`}
                 >
                   JOIN OUR EXCLUSIVE LIVE STREAMING EVENT
@@ -433,7 +440,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                     }`}
                   ref={slide7Ref}
                 >
-                  <h3 className="uppercase font-ovo text-sm mt-5 mb-2">
+                  <h3 className="uppercase font-ovo text-base mt-5 mb-2">
                     {new Date(config.eventDate).toLocaleDateString("en-US", {
                       weekday: "long",
                       year: "numeric",
@@ -442,13 +449,13 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                     })}
                     <br /> {config.livestreaming.time}
                   </h3>
-                  <p className="text-sm font-legan text-white">
+                  <p className="text-base font-legan text-white">
                     {config.livestreaming.detail}
                   </p>
                   <Link
                     href={config.livestreaming.link}
                     target="_blank"
-                    className="cursor-pointer hover:text-white/20 text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#3B3B3B] w-fit px-6 py-3 text-white"
+                    className="cursor-pointer hover:text-white/20 text-base rounded-full flex items-center gap-x-2 text-center font-legan mt-5 bg-[#3B3B3B] w-fit px-6 py-3 text-white"
                   >
                     Join Live Streaming
                   </Link>
@@ -507,10 +514,10 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 ref={slide9Ref}
                 className={`${isSlide9InView ? "active" : ""} fadeInMove`}
               >
-                <h1 className="text-3xl text-white font-ovo text-center uppercase">
+                <h1 className="text-3xl sm:text-4xl text-white font-ovo text-center uppercase mb-1">
                   RSVP AND WISHES
                 </h1>
-                <p className="text-sm font-legan text-white/80 text-center">
+                <p className="text-base font-legan text-white/80 text-center">
                 {config.rsvp.detail}
                 </p>
 
@@ -532,7 +539,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 ref={slide10Ref}
                 className={`${isSlide10InView ? "active" : ""} fadeInMove`}
               >
-                <h1 className="text-3xl text-white font-ovo text-center uppercase">
+                <h1 className="text-4xl text-white font-ovo text-center uppercase">
                   Wishes
                 </h1>
                 <WishesList />
@@ -552,15 +559,15 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 ref={endRef}
                 className={` ${isEndInView ? "active" : ""} fadeInMove `}
               >
-                <h1 className="text-3xl text-white  font-ovo text-center uppercase">
+                <h1 className="text-4xl text-white  font-ovo text-center uppercase">
                   {config.thankyou}
                 </h1>
 
                 <div className="mt-5 mx-auto flex flex-col ">
-                  <p className="text-sm font-legan text-white text-center">
+                  <p className="text-base font-legan text-white text-center">
                     {config.thankyouDetail}
                   </p>
-                  <p className="text-sm rounded-full text-center font-ovo mt-5 px-6 py-2 text-white uppercase">
+                  <p className="text-base rounded-full text-center font-ovo mt-5 px-6 py-2 text-white uppercase">
                     {config.coupleNames}
                   </p>
                 </div>
@@ -573,26 +580,26 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 ref={infoRef}
                 className={`${isInfoInView ? "active" : ""} fadeInMove flex-1 flex flex-col justify-center`}
               >
-                <h1 className="text-2xl text-white font-ovo text-center uppercase mb-6">
+                <h1 className="text-3xl text-white font-ovo text-center uppercase mb-6">
                   Thông Tin Ngày Giờ
                 </h1>
 
                 <div className="flex flex-col gap-y-4">
                   {config.holyMatrimony.enabled && (
                     <div className="border border-white/20 rounded-lg p-5 flex flex-col items-center text-center">
-                      <h3 className="uppercase font-ovo text-base mb-2">
+                      <h3 className="uppercase font-ovo text-lg mb-2">
                         Lễ Ăn Hỏi
                       </h3>
-                      <p className="text-sm font-legan text-white/80">
+                      <p className="text-base font-legan text-white/80">
                         {config.holyMatrimony.time}
                       </p>
-                      <p className="text-sm font-legan text-white/80 mt-2">
+                      <p className="text-base font-legan text-white/80 mt-2">
                         {config.holyMatrimony.place} <br /> {config.holyMatrimony.place_details}
                       </p>
                       <Link
                         href={config.holyMatrimony.googleMapsLink}
                         target="_blank"
-                        className="cursor-pointer hover:text-white/20 text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-4 bg-[#808080] w-fit px-5 py-3 text-white"
+                        className="cursor-pointer hover:text-white/20 text-base rounded-full flex items-center gap-x-2 text-center font-legan mt-4 bg-[#808080] w-fit px-5 py-3 text-white"
                       >
                         Google Maps
                       </Link>
@@ -601,19 +608,19 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
 
                   {config.weddingReception.enabled && (
                     <div className="border border-white/20 rounded-lg p-5 flex flex-col items-center text-center">
-                      <h3 className="uppercase font-ovo text-base mb-2">
+                      <h3 className="uppercase font-ovo text-lg mb-2">
                         Tiệc Cưới
                       </h3>
-                      <p className="text-sm font-legan text-white/80">
+                      <p className="text-base font-legan text-white/80">
                         {config.weddingReception.time}
                       </p>
-                      <p className="text-sm font-legan text-white/80 mt-2">
+                      <p className="text-base font-legan text-white/80 mt-2">
                         {config.weddingReception.place} <br /> {config.weddingReception.place_details}
                       </p>
                       <Link
                         href={config.weddingReception.googleMapsLink}
                         target="_blank"
-                        className="cursor-pointer hover:text-white/20 text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-4 bg-[#808080] w-fit px-5 py-3 text-white"
+                        className="cursor-pointer hover:text-white/20 text-base rounded-full flex items-center gap-x-2 text-center font-legan mt-4 bg-[#808080] w-fit px-5 py-3 text-white"
                       >
                         Google Maps
                       </Link>
@@ -622,10 +629,10 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
 
                   {config.livestreaming.enabled && (
                     <div className="border border-white/20 rounded-lg p-5 flex flex-col items-center text-center">
-                      <h3 className="uppercase font-ovo text-base mb-2">
+                      <h3 className="uppercase font-ovo text-lg mb-2">
                         Livestream
                       </h3>
-                      <p className="text-sm font-legan text-white/80">
+                      <p className="text-base font-legan text-white/80">
                         {new Date(config.eventDate).toLocaleDateString("en-US", {
                           weekday: "long",
                           year: "numeric",
@@ -637,7 +644,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                       <Link
                         href={config.livestreaming.link}
                         target="_blank"
-                        className="cursor-pointer hover:text-white/20 text-sm rounded-full flex items-center gap-x-2 text-center font-legan mt-4 bg-[#3B3B3B] w-fit px-5 py-3 text-white"
+                        className="cursor-pointer hover:text-white/20 text-base rounded-full flex items-center gap-x-2 text-center font-legan mt-4 bg-[#3B3B3B] w-fit px-5 py-3 text-white"
                       >
                         Join Live Streaming
                       </Link>
@@ -647,7 +654,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
               </div>
 
               <footer className="flex flex-col items-center mt-6">
-                <p className="text-xs">© All rights reserved by Thanh Tú @ Hà Giang</p>
+                <p className="text-sm">© All rights reserved by Thanh Tú @ Hà Giang</p>
               </footer>
             </div>
           </>

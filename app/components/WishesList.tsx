@@ -55,7 +55,7 @@ const WishesList = () => {
       <div className="flex justify-end mb-4">
         <button
           onClick={handleRefresh}
-          className={`text-sm text-white p-2 -m-2 ${
+          className={`text-base text-white p-2 -m-2 ${
             loading ? "opacity-50 cursor-not-allowed" : ""
           }`}
           disabled={loading} // Disable while loading
@@ -71,7 +71,7 @@ const WishesList = () => {
           wishes.map((wish) => (
             <div key={wish._id} className="mb-4">
               <p className="font-bold font-legan">{wish.name}</p>
-              <p className="text-sm my-2 opacity-50">
+              <p className="text-base my-2 opacity-50">
                 {new Date(wish.createdAt).toLocaleString("en-US", {
                   year: "numeric",
                   month: "long",
@@ -80,7 +80,7 @@ const WishesList = () => {
                   minute: "numeric",
                 })}
               </p>
-              <p className="text-sm">{wish.message}</p>
+              <p className="text-base">{wish.message}</p>
               <hr className="my-2 border-gray-400" />
             </div>
           ))
@@ -90,19 +90,19 @@ const WishesList = () => {
       <div className="flex justify-between mt-8">
         <button
           onClick={handlePreviousPage}
-          className={`text-sm text-white px-3 py-2 -mx-3 -my-2 ${
+          className={`text-base text-white px-3 py-2 -mx-3 -my-2 ${
             page === 1 ? "opacity-50 cursor-not-allowed" : ""
           }`}
           disabled={page === 1}
         >
           Previous
         </button>
-        <p className="text-xs">
+        <p className="text-sm">
           Page {page} of {totalPages}
         </p>
         <button
           onClick={handleNextPage}
-          className={`text-sm text-white px-3 py-2 -mx-3 -my-2 ${
+          className={`text-base text-white px-3 py-2 -mx-3 -my-2 ${
             page === totalPages ? "opacity-50 cursor-not-allowed" : ""
           }`}
           disabled={page === totalPages}
