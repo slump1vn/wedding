@@ -561,9 +561,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                 </div>
               </div>
 
-              <footer className="flex flex-col items-center mt-6">
-                <p className="text-sm">© Bản quyền thuộc về Thanh Tú & Hà Giang</p>
-              </footer>
             </div>
           </>
         )}
