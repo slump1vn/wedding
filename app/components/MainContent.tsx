@@ -90,7 +90,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
 
   return (
     <div
-      className={`wedding-screen h-screen w-screen flex flex-col md:flex-row ${fadeClass} transition-opacity duration-1000`}
+      className={`wedding-screen h-dvh w-screen flex flex-col md:flex-row ${fadeClass} transition-opacity duration-1000`}
     >
       {/* Gambar sisi kiri Wide Untuk Komputer */}
       <div
@@ -112,7 +112,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
       <div className=" md:w-1/3 h-full overflow-y-scroll snap-y snap-mandatory scroll-smooth">
         <div
           id="backgroundWedding"
-          className=" snap-start  w-full h-screen flex items-center justify-center "
+          className=" snap-start  w-full h-dvh flex items-center justify-center "
         >
           <div className="text-center p-5 flex flex-col h-full py-20">
             <div className="gap-y-2 md:gap-y-4 flex flex-col">
@@ -182,7 +182,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
           <>
             {/* Slide 2 */}
             <div
-              className={`text-white h-screen flex items-end pb-16 px-12 snap-start `}
+              className={`text-white h-dvh flex items-end pb-16 px-12 snap-start `}
               style={{
                 backgroundImage: `url(/slide_2.jpg)`,
                 backgroundSize: "cover",
@@ -213,7 +213,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
             </div>
             {/* Slide 3 */}
             <div
-              className="snap-start  text-white h-screen flex items-end pb-16 px-12 "
+              className="snap-start  text-white h-dvh flex items-end pb-16 px-12 "
               style={{
                 backgroundImage: `url(/slide_3.jpg)`,
                 backgroundSize: "cover",
@@ -243,7 +243,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
             </div>
             {/* Slide 5 */}
             <div
-              className="snap-start  text-white h-screen flex flex-col items-center px-12 "
+              className="snap-start  text-white h-dvh flex flex-col items-center px-12 "
               style={{
                 backgroundImage: `url(/slide_5.jpg)`,
                 backgroundSize: "cover",
@@ -306,7 +306,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
             </div>
             {/* Slide 6 */}
             <div
-              className="snap-start  text-white h-screen flex flex-col items-center justify-end pb-16 px-12 "
+              className="snap-start  text-white h-dvh flex flex-col items-center justify-end pb-16 px-12 "
               style={{
                 backgroundImage: `url(/slide_6.jpg)`,
                 backgroundSize: "cover",
@@ -328,7 +328,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
             {/* Slide 7 */}
             {config.livestreaming.enabled && (
               <div
-                className="snap-start  text-white h-screen flex flex-col justify-between pt-16 pb-32 px-12 "
+                className="snap-start  text-white h-dvh flex flex-col justify-between pt-16 pb-32 px-12 "
                 style={{
                   backgroundImage: `url(/foto_1_samping.jpg)`,
                   backgroundSize: "cover",
@@ -372,7 +372,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
             {/* SLIDE 8 */}
             {config.prewedding.enabled && (
               <div
-                className="snap-start text-white h-screen flex flex-col justify-center pt-16 pb-16 px-8 "
+                className="snap-start text-white h-dvh flex flex-col justify-center pt-16 pb-16 px-8 "
                 style={{
                   backgroundImage: `url(/slide_8.jpg)`,
                   backgroundSize: "cover",
@@ -411,7 +411,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
             {/* SLIDE 9 */}
             {config.rsvp.enabled && (
             <div
-              className="snap-start text-white h-screen flex flex-col justify-center pt-16 pb-16 px-8"
+              className="snap-start text-white h-dvh flex flex-col justify-center pt-16 pb-16 px-8"
               style={{
                 backgroundImage: `url(/slide_9.jpg)`,
                 backgroundSize: "cover",
@@ -436,7 +436,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
 
             {/* SLIDE 10 */}
             <div
-              className="snap-start text-white h-screen flex flex-col justify-center pt-16 pb-16 px-8"
+              className="snap-start text-white h-dvh flex flex-col justify-center pt-16 pb-16 px-8"
               style={{
                 backgroundImage: `url(/slide_9.jpg)`,
                 backgroundSize: "cover",
@@ -456,7 +456,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
 
             {/* SLIDE AKHIR */}
             <div
-              className="snap-start text-white h-screen flex flex-col justify-end pt-16 pb-16 px-12 "
+              className="snap-start text-white h-dvh flex flex-col justify-end pt-16 pb-16 px-12 "
               style={{
                 backgroundImage: `url(/slide_7.jpg)`,
                 backgroundSize: "cover",
@@ -483,7 +483,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
             </div>
 
             {/* SLIDE THÔNG TIN NGÀY GIỜ */}
-            <div className="snap-start text-white h-screen flex flex-col justify-center pt-16 pb-10 px-8 bg-[#0a0a0a]">
+            <div className="snap-start text-white h-dvh flex flex-col justify-center pt-16 pb-10 px-8 bg-[#0a0a0a]">
               <div
                 ref={infoRef}
                 className={`${isInfoInView ? "active" : ""} fadeInMove flex-1 flex flex-col justify-center`}

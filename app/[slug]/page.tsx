@@ -30,7 +30,7 @@ export default function Home({ params: { slug } }: ParamsProps) {
   }, [slug]);
 
   return (
-    <div className="h-screen">
+    <div className="h-dvh">
       <ScreenStart />
       {showContent && <MainContent name={name} />} {/* Tampilkan MainContent */}
     </div>

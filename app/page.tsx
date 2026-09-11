@@ -16,7 +16,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="h-screen">
+    <div className="h-dvh">
       <ScreenStart />
       {showContent && <MainContent />} {/* Tampilkan MainContent */}
     </div>
