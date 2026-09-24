@@ -7,7 +7,6 @@ import { useInView } from "react-intersection-observer";
 import {
   FaGift,
   FaMapMarkerAlt,
-  FaInstagram,
   FaHeart,
   FaPlay,
   FaPause,
@@ -28,7 +27,6 @@ const photos = {
     "/juhi/PMN02276.jpg",
     "/juhi/DUC06202.jpg",
     "/juhi/PMN03369.jpg",
-    "/juhi/PMN03044.jpg",
     "/juhi/PMN02925_2.jpg",
     "/juhi/PMN03562.jpg",
     "/juhi/DUC06717.jpg",
@@ -88,7 +86,6 @@ const PersonCard = ({
   name,
   father,
   mother,
-  instagram,
   reverse,
 }: {
   label: string;
@@ -96,7 +93,6 @@ const PersonCard = ({
   name: string;
   father?: string;
   mother?: string;
-  instagram?: string;
   reverse?: boolean;
 }) => {
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
@@ -122,13 +118,6 @@ const PersonCard = ({
           {father && mother && <br />}
           {mother}
         </p>
-      )}
-      {instagram && (
-        <div className="flex gap-2 mt-3">
-          <IconButton href={`https://www.instagram.com/${instagram}`}>
-            <FaInstagram />
-          </IconButton>
-        </div>
       )}
     </div>
   );
@@ -298,7 +287,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
             name={config.groom}
             father={config.groomFather}
             mother={config.groomMother}
-            instagram={config.groomInstagram}
           />
           <PersonCard
             label="cô dâu"
@@ -306,7 +294,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
             name={config.bride}
             father={config.brideFather}
             mother={config.brideMother}
-            instagram={config.brideInstagram}
             reverse
           />
         </section>
@@ -320,10 +307,10 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
             Album Ảnh
           </h2>
           <div className="grid grid-cols-2 gap-2">
-            {photos.album.map((src, i) => (
+            {photos.album.map((src) => (
               <div
                 key={src}
-                className={`bg-cover bg-center rounded-md ${i % 3 === 0 ? "aspect-[3/4] col-span-1" : "aspect-square"}`}
+                className="bg-cover bg-center rounded-md aspect-[3/4]"
                 style={{ backgroundImage: `url(${src})` }}
               />
             ))}
