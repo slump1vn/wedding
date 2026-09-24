@@ -8,10 +8,6 @@ import {
   FaGift,
   FaMapMarkerAlt,
   FaInstagram,
-  FaFacebookF,
-  FaTwitter,
-  FaLinkedinIn,
-  FaPinterestP,
   FaHeart,
   FaPlay,
   FaPause,
@@ -415,21 +411,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
               <p className="font-vietnam text-sm text-white/90 mt-4 max-w-xs mx-auto">
                 {config.thankyouDetail}
               </p>
-              <h3 className="font-playfair text-lg text-white mt-8">Chia sẻ thiệp</h3>
-              <div className="flex justify-center gap-3 mt-3">
-                <IconButton href="https://www.facebook.com/sharer/sharer.php">
-                  <FaFacebookF />
-                </IconButton>
-                <IconButton href="https://twitter.com/intent/tweet">
-                  <FaTwitter />
-                </IconButton>
-                <IconButton href="https://www.linkedin.com/sharing/share-offsite/">
-                  <FaLinkedinIn />
-                </IconButton>
-                <IconButton href="https://www.pinterest.com/pin/create/button/">
-                  <FaPinterestP />
-                </IconButton>
-              </div>
             </div>
           </div>
         </section>
