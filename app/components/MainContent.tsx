@@ -249,7 +249,9 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
         <section className="relative px-6 pt-20 pb-10 text-center">
           <div className="mx-auto max-w-sm rounded-t-[110px] rounded-b-3xl border border-sage/25 bg-white/50 backdrop-blur-sm pt-14 pb-8 px-6 relative">
             {name && (
-              <p className="font-vietnam text-sm text-[#6E6E6E] mb-2">Kính gửi {name},</p>
+              <p className="font-quicksand text-xs uppercase tracking-[4px] text-[#6E6E6E] mb-2">
+                Kính gửi {name},
+              </p>
             )}
             <p className="font-quicksand text-xs uppercase tracking-[4px] text-[#6E6E6E]">
               Save the Date
@@ -355,11 +357,14 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
         {/* TRÂN TRỌNG KÍNH MỜI */}
         {config.weddingReception.enabled && (
           <section className="px-6 py-10 text-center">
-            <h2 className="font-playfair font-bold text-2xl leading-snug uppercase text-[#232323] mb-6">
+            <h2 className="font-playfair font-bold text-2xl leading-snug uppercase text-[#232323] mb-2">
               Trân Trọng
               <br />
               Kính Mời
             </h2>
+            <p className="font-dancing text-3xl text-sage mb-6">
+              {name || "Quý Khách"}
+            </p>
             <EventCard
               title="Bữa Cơm Thân Mật"
               date={eventDate}
