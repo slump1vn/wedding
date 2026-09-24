@@ -3,25 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --font-ovo: 'Ovo', serif;
-  --font-legan: 'Legan', serif;
-  --font-wonder: 'Wonder', sans-serif;
-  --font-thesignature: 'Thesignature', sans-serif;
+  --background: #FCF5F2;
+  --foreground: #343434;
 }
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer utilities {
@@ -30,116 +18,49 @@ body {
   }
 }
 
-
-.fade-in {
-  animation: fadeIn 1s ease-in-out;
-}
-
-#backgroundWedding {
-  background-size: cover;
-  background-position: center;
-  background-image: url(../public/foto_2.jpg);
-  background-repeat: no-repeat;
-  animation-name: animate;
-  animation-direction: normal;
-  animation-play-state: running;
-  animation-timing-function: steps(1, jump-start);
-  animation-duration: 10s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  background-color: #0a0a0a;
-}
-
-@keyframes animate {
- 0% {
-  background-image: url(../public/foto_2.jpg);
- }
- 45% {
-  background-image: url(../public/foto_4.jpg);
- }
-  85% {
-    background-image: url(../public/foto_1.jpg);
-  }
-  100% {
-    background-image: url(../public/foto_2.jpg);
-  }
-}
-
-#backgroundWedding > div {
-  animation: fade 5s infinite;
-}
-
-/* Animasi fade-in dan gerakan */
-.fadeMain {
-  opacity: 0;
-  transition: opacity 3s ease-in;
-}
-.fadeMain2 {
-  opacity: 0;
-  transition: opacity 0.8s ease-out;
-}
-
+/* Fade/slide-in on scroll, toggled by the "active" class via useInView */
 .fadeInMove {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+  transform: translateY(24px);
+  transition: opacity 0.9s ease-out, transform 0.9s ease-out;
 }
 .fadeInMoveSlow {
   opacity: 0;
   transform: translateY(-20px);
-  transition: opacity 2s ease-in, transform 2s ease-out;
+  transition: opacity 1.2s ease-in, transform 1.2s ease-out;
 }
-
 .fadeInLeft {
   opacity: 0;
-  transform: translateX(-50px);
-  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
-}
-
-.fadeInLeftSlow {
-  opacity: 0;
-  transform: translateX(-50px);
-  transition: opacity 2.5s ease-out, transform 2.5s ease-out;
+  transform: translateX(-30px);
+  transition: opacity 0.9s ease-out, transform 0.9s ease-out;
 }
 
 .active {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(0, 0);
 }
 
-/* Outline dark text-shadow so white text stays legible over bright/white areas of background photos */
-.wedding-screen .text-white,
-.wedding-screen [class*="text-white/"] {
-  text-shadow:
-    -1.5px -1.5px 3px rgba(0, 0, 0, 0.85),
-     1.5px -1.5px 3px rgba(0, 0, 0, 0.85),
-    -1.5px  1.5px 3px rgba(0, 0, 0, 0.85),
-     1.5px  1.5px 3px rgba(0, 0, 0, 0.85),
-     0px  0px 3px rgba(0, 0, 0, 0.85),
-     0px  0px 8px rgba(0, 0, 0, 0.6);
-}
-
-/* Buttons already sit on solid fills; keep their text crisp */
-.wedding-screen button.text-white,
-.wedding-screen button .text-white,
-.wedding-screen a.text-white,
-.wedding-screen a .text-white {
-  text-shadow: none;
-}
-
-/* Pulsing glow ring to draw attention to the main call-to-action button */
+/* Pulsing glow ring to draw attention to a call-to-action button */
 @keyframes glowPulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.55);
+    box-shadow: 0 0 0 0 rgba(88, 124, 76, 0.45);
   }
   70% {
-    box-shadow: 0 0 0 18px rgba(255, 255, 255, 0);
+    box-shadow: 0 0 0 16px rgba(88, 124, 76, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    box-shadow: 0 0 0 0 rgba(88, 124, 76, 0);
   }
 }
-
 .btn-glow {
   animation: glowPulse 2.2s ease-out infinite;
+}
+
+/* Floating music toggle spins while playing */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.spin-slow {
+  animation: spinSlow 6s linear infinite;
 }

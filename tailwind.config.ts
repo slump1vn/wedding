@@ -9,14 +9,18 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        ovo: ["var(--font-ovo)", "serif"],
-        legan: ["var(--font-legan)", "serif"],
-        wonder: ["var(--font-wonder)", "sans-serif"],
-        thesignature: ["var(--font-thesignature)", "serif"],
+        playfair: ["var(--font-playfair)", "serif"],
+        dancing: ["var(--font-dancing)", "cursive"],
+        vietnam: ["var(--font-vietnam)", "sans-serif"],
+        quicksand: ["var(--font-quicksand)", "sans-serif"],
       },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        sage: "#587C4C",
+        brown: "#6D3E28",
+        "mint-bg": "#ECFAE8",
+        "pink-bg": "#FCF5F2",
       },
       keyframes: {
         upDown: {

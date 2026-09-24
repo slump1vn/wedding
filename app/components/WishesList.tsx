@@ -51,27 +51,32 @@ const WishesList = () => {
   };
 
   return (
-    <div className="bg-black/50 text-white p-4 rounded-md mt-5">
-      <div className="flex justify-end mb-4">
+    <div className="bg-white text-[#343434] p-4 rounded-2xl mt-6 border border-sage/20 shadow-sm font-vietnam">
+      <div className="flex items-center justify-between mb-3">
+        <p className="font-playfair text-brown text-lg">Lời chúc từ mọi người</p>
         <button
           onClick={handleRefresh}
-          className={`text-lg text-white p-2 -m-2 ${
+          className={`text-sage p-2 -m-2 ${
             loading ? "opacity-50 cursor-not-allowed" : ""
           }`}
           disabled={loading} // Disable while loading
         >
-          {loading ? "Đang làm mới..." : <IoMdRefresh className="w-7 h-7" />}
+          {loading ? (
+            <span className="text-xs">Đang làm mới...</span>
+          ) : (
+            <IoMdRefresh className="w-6 h-6" />
+          )}
         </button>
       </div>
 
-      <div className="max-h-[500px] overflow-y-auto">
+      <div className="max-h-[400px] overflow-y-auto">
         {wishes.length === 0 ? (
-          <p>Chưa có lời chúc nào</p>
+          <p className="text-sm text-[#7D7D7D]">Chưa có lời chúc nào</p>
         ) : (
           wishes.map((wish) => (
             <div key={wish._id} className="mb-4">
-              <p className="font-bold font-legan">{wish.name}</p>
-              <p className="text-lg my-2 opacity-50">
+              <p className="font-semibold text-brown">{wish.name}</p>
+              <p className="text-xs my-1 text-[#7D7D7D]">
                 {new Date(wish.createdAt).toLocaleString("vi-VN", {
                   year: "numeric",
                   month: "long",
@@ -80,30 +85,30 @@ const WishesList = () => {
                   minute: "numeric",
                 })}
               </p>
-              <p className="text-lg">{wish.message}</p>
-              <hr className="my-2 border-gray-400" />
+              <p className="text-sm">{wish.message}</p>
+              <hr className="my-3 border-sage/20" />
             </div>
           ))
         )}
       </div>
 
-      <div className="flex justify-between mt-8">
+      <div className="flex justify-between mt-4 text-sm">
         <button
           onClick={handlePreviousPage}
-          className={`text-lg text-white px-3 py-2 -mx-3 -my-2 ${
-            page === 1 ? "opacity-50 cursor-not-allowed" : ""
+          className={`text-sage px-3 py-2 -mx-3 -my-2 ${
+            page === 1 ? "opacity-40 cursor-not-allowed" : ""
           }`}
           disabled={page === 1}
         >
           Trước
         </button>
-        <p className="text-base">
+        <p className="text-xs text-[#7D7D7D] self-center">
           Trang {page}/{totalPages}
         </p>
         <button
           onClick={handleNextPage}
-          className={`text-lg text-white px-3 py-2 -mx-3 -my-2 ${
-            page === totalPages ? "opacity-50 cursor-not-allowed" : ""
+          className={`text-sage px-3 py-2 -mx-3 -my-2 ${
+            page === totalPages ? "opacity-40 cursor-not-allowed" : ""
           }`}
           disabled={page === totalPages}
         >

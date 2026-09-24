@@ -1,33 +1,32 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, EB_Garamond, Great_Vibes, Alex_Brush } from "@next/font/google";
+import { Playfair_Display, Dancing_Script, Be_Vietnam_Pro, Quicksand } from "@next/font/google";
 import "./globals.css";
 import { config } from "@/lib/config";
 
 // Fonts below all ship a "vietnamese" subset so diacritics (ệ, ầ, ộ, ...) render correctly.
-const ovo = Cormorant_Garamond({
-  weight: ["400", "500", "600"],
+const playfair = Playfair_Display({
+  weight: ["400", "500", "600", "700", "800"],
   subsets: ["latin", "vietnamese"],
-  variable: "--font-ovo",
+  variable: "--font-playfair",
 });
 
-const legan = EB_Garamond({
+const dancing = Dancing_Script({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin", "vietnamese"],
-  variable: "--font-legan",
+  variable: "--font-dancing",
 });
 
-const thesignature = Alex_Brush({
-  weight: "400",
+const vietnam = Be_Vietnam_Pro({
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin", "vietnamese"],
-  variable: "--font-thesignature",
+  variable: "--font-vietnam",
 });
 
-const wonder = Great_Vibes({
-  weight: "400",
+const quicksand = Quicksand({
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin", "vietnamese"],
-  variable: "--font-wonder",
+  variable: "--font-quicksand",
 });
-
 
 export const metadata: Metadata = {
   title: `The Wedding of ${config.coupleNames}`,
@@ -42,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`bg-[#0a0a0a]  ${ovo.variable} ${thesignature.variable} ${wonder.variable} ${legan.variable}  antialiased`}
+        className={`bg-[#FCF5F2] ${playfair.variable} ${dancing.variable} ${vietnam.variable} ${quicksand.variable} antialiased`}
       >
         {children}
       </body>

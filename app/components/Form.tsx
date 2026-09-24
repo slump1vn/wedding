@@ -48,17 +48,17 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4 font-vietnam">
       {/* Form fields */}
       <div>
-        <label htmlFor="name" className="block text-lg font-medium text-white">
-          Họ và tên
+        <label htmlFor="name" className="block text-sm text-brown text-center mb-1">
+          Tên
         </label>
         <input
           type="text"
           name="name"
           id="name"
-          className="block w-full p-2 mt-1 bg-white/10 text-white border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-lg"
+          className="block w-full p-2.5 bg-white text-[#343434] border border-sage/30 rounded-md shadow-sm focus:border-sage focus:ring-sage sm:text-sm"
           required
         />
       </div>
@@ -66,14 +66,14 @@ const Form = () => {
       <div>
         <label
           htmlFor="attendance"
-          className="block text-lg font-medium text-white"
+          className="block text-sm text-brown text-center mb-1"
         >
           Tình trạng tham dự
         </label>
         <select
           id="attendance"
           name="attendance"
-          className="block w-full p-2 mt-1 bg-black/40 text-white border border-gray-300 rounded-md shadow-sm  sm:text-lg"
+          className="block w-full p-2.5 bg-white text-[#343434] border border-sage/30 rounded-md shadow-sm sm:text-sm"
           required
         >
           <option value="">Chọn tình trạng tham dự</option>
@@ -85,14 +85,14 @@ const Form = () => {
       <div>
         <label
           htmlFor="guests"
-          className="block text-lg font-medium text-white"
+          className="block text-sm text-brown text-center mb-1"
         >
           Số lượng khách
         </label>
         <select
           id="guests"
           name="guests"
-          className="block w-full p-2 mt-1  bg-black/40 text-white border border-gray-300 rounded-md shadow-sm  sm:text-lg"
+          className="block w-full p-2.5 bg-white text-[#343434] border border-sage/30 rounded-md shadow-sm sm:text-sm"
           required
         >
           <option value="">Chọn số lượng khách</option>
@@ -106,26 +106,26 @@ const Form = () => {
       <div>
         <label
           htmlFor="message"
-          className="block text-lg font-medium text-white"
+          className="block text-sm text-brown text-center mb-1"
         >
-          Lời chúc
+          Lời nhắn gửi
         </label>
         <textarea
           id="message"
           name="message"
           rows={4}
-          className="block w-full p-2 mt-1 bg-white/10 text-white border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-lg"
+          className="block w-full p-2.5 bg-white text-[#343434] border border-sage/30 rounded-md shadow-sm focus:border-sage focus:ring-sage sm:text-sm"
           required
         />
       </div>
 
-      <div>
+      <div className="text-center pt-2">
         <button
           type="submit"
-          className="block w-full p-3 text-xl font-medium text-center text-black bg-white border border-transparent rounded-md shadow-sm"
-          disabled={loading} 
+          className="px-8 py-2.5 text-sm font-medium text-center text-white bg-sage hover:bg-sage/90 border border-transparent rounded-md shadow-sm transition disabled:opacity-60"
+          disabled={loading}
         >
-          {loading ? "Đang gửi..." : "Gửi"}
+          {loading ? "Đang gửi..." : "Gửi lời chúc"}
         </button>
       </div>
     </form>
