@@ -258,6 +258,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
 
   const eventDate = new Date(config.eventDate);
   const holyMatrimonyDate = new Date(config.holyMatrimony.date);
+  const vanHoaDate = new Date("2026-10-18T11:30:00");
   const [nameLine1, nameLine2] = config.coupleNames.split(" & ");
 
   const { ref: introRef, inView: introInView } = useInView({ threshold: 0.2, triggerOnce: true });
@@ -295,6 +296,15 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
               placeDetails={config.weddingReception.place_details}
               lunarDate={config.weddingReception.lunarDate}
               googleMapsLink={config.weddingReception.googleMapsLink}
+            />
+            <div className="h-6" />
+            <EventCard
+              title="Mời Cơm Trưa"
+              date={vanHoaDate}
+              place="Nhà hàng Vạn Hoa"
+              placeDetails="79 Lê Đức Thọ"
+              lunarDate="Tức ngày 09 tháng 09 năm Bính Ngọ"
+              googleMapsLink="https://www.google.com/maps/search/?api=1&query=Nh%C3%A0+h%C3%A0ng+V%E1%BA%A1n+Hoa+79+L%C3%AA+%C4%90%E1%BB%A9c+Th%E1%BB%8D"
             />
           </section>
         )}
