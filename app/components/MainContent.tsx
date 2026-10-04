@@ -134,6 +134,7 @@ const EventCard = ({
   lunarDate,
   googleMapsLink,
   tint = "mint",
+  photo,
 }: {
   eyebrow?: string;
   title: string;
@@ -143,6 +144,7 @@ const EventCard = ({
   lunarDate?: string;
   googleMapsLink: string;
   tint?: "mint" | "none";
+  photo?: string;
 }) => {
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
   return (
@@ -152,10 +154,10 @@ const EventCard = ({
         tint === "mint" ? "bg-mint-bg border border-sage/20" : ""
       } rounded-[32px] px-6 py-8 text-center`}
     >
-      {photos.receptionCircle && tint === "mint" && (
+      {(photo || photos.receptionCircle) && tint === "mint" && (
         <div
           className="w-32 h-32 md:w-36 md:h-36 rounded-full bg-cover bg-center mx-auto border-4 border-white shadow"
-          style={{ backgroundImage: `url(${photos.receptionCircle})` }}
+          style={{ backgroundImage: `url(${photo || photos.receptionCircle})` }}
         />
       )}
       {eyebrow && (
@@ -299,15 +301,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
               lunarDate={config.weddingReception.lunarDate}
               googleMapsLink={config.weddingReception.googleMapsLink}
             />
-            <div className="h-6" />
-            <EventCard
-              title="Mời Cơm Trưa"
-              date={vanHoaDate}
-              place="Nhà hàng Vạn Hoa"
-              placeDetails="79 Lê Đức Thọ"
-              lunarDate="Tức ngày 09 tháng 09 năm Bính Ngọ"
-              googleMapsLink="https://www.google.com/maps/search/?api=1&query=Nh%C3%A0+h%C3%A0ng+V%E1%BA%A1n+Hoa+79+L%C3%AA+%C4%90%E1%BB%A9c+Th%E1%BB%8D"
-            />
           </section>
         )}
 
@@ -377,6 +370,19 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
           <div className="absolute -bottom-4 left-0 w-24 md:w-32 aspect-[380/673] pointer-events-none select-none">
             <Image src={`${base}/juhi/bottom-left.png`} alt="" fill className="object-contain" />
           </div>
+        </section>
+
+        {/* BỮA CƠM GIA ĐÌNH */}
+        <section className="px-6 pb-6 text-center">
+          <EventCard
+            title="Bữa Cơm Gia Đình"
+            date={vanHoaDate}
+            place="Nhà hàng Vạn Hoa"
+            placeDetails="79 Lê Đức Thọ"
+            photo={`${base}/juhi/DUC06202.jpg`}
+            lunarDate="Tức ngày 09 tháng 09 năm Bính Ngọ"
+            googleMapsLink="https://www.google.com/maps/search/?api=1&query=Nh%C3%A0+h%C3%A0ng+V%E1%BA%A1n+Hoa+79+L%C3%AA+%C4%90%E1%BB%A9c+Th%E1%BB%8D"
+          />
         </section>
 
         {/* ALBUM ẢNH */}
