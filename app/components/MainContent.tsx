@@ -320,6 +320,28 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
           </div>
         </section>
 
+        {/* TRÂN TRỌNG KÍNH MỜI */}
+        {config.weddingReception.enabled && (
+          <section className="px-6 py-10 text-center">
+            <h2 className="font-playfair font-bold text-2xl leading-snug uppercase text-[#232323] mb-2">
+              Trân Trọng
+              <br />
+              Kính Mời
+            </h2>
+            <p className="font-dancing text-3xl text-sage mb-6">
+              {name || "Quý Khách"}
+            </p>
+            <EventCard
+              title="Bữa Cơm Thân Mật"
+              date={eventDate}
+              place={config.weddingReception.place}
+              placeDetails={config.weddingReception.place_details}
+              lunarDate={config.weddingReception.lunarDate}
+              googleMapsLink={config.weddingReception.googleMapsLink}
+            />
+          </section>
+        )}
+
         {/* GIỚI THIỆU */}
         <section
           ref={introRef}
@@ -383,28 +405,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
             <CountdownTimer />
           </div>
         </section>
-
-        {/* TRÂN TRỌNG KÍNH MỜI */}
-        {config.weddingReception.enabled && (
-          <section className="px-6 py-10 text-center">
-            <h2 className="font-playfair font-bold text-2xl leading-snug uppercase text-[#232323] mb-2">
-              Trân Trọng
-              <br />
-              Kính Mời
-            </h2>
-            <p className="font-dancing text-3xl text-sage mb-6">
-              {name || "Quý Khách"}
-            </p>
-            <EventCard
-              title="Bữa Cơm Thân Mật"
-              date={eventDate}
-              place={config.weddingReception.place}
-              placeDetails={config.weddingReception.place_details}
-              lunarDate={config.weddingReception.lunarDate}
-              googleMapsLink={config.weddingReception.googleMapsLink}
-            />
-          </section>
-        )}
 
         {/* GỬI LỜI CHÚC */}
         {config.rsvp.enabled && (
