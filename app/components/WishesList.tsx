@@ -19,7 +19,7 @@ const WishesList = () => {
   const fetchWishes = async (pageNumber: number) => {
     setLoading(true); // Set loading to true when fetching
     try {
-      const response = await fetch(`/api/get?page=${pageNumber}&limit=5`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/api/get?page=${pageNumber}&limit=5`);
       if (!response.ok) {
         throw new Error(`Error fetching wishes: ${response.statusText}`);
       }

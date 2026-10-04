@@ -20,21 +20,23 @@ type WeddingScreenProps = {
   name?: string;
 };
 
+const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const photos = {
-  groom: "/juhi/PMN03281.jpg",
-  bride: "/juhi/PMN02833.jpg",
+  groom: `${base}/juhi/PMN03281.jpg`,
+  bride: `${base}/juhi/PMN02833.jpg`,
   album: [
-    "/juhi/PMN02276.jpg",
-    "/juhi/DUC06202.jpg",
-    "/juhi/PMN03369.jpg",
-    "/juhi/PMN02925_2.jpg",
-    "/juhi/PMN03562.jpg",
-    "/juhi/DUC06717.jpg",
+    `${base}/juhi/PMN02276.jpg`,
+    `${base}/juhi/DUC06202.jpg`,
+    `${base}/juhi/PMN03369.jpg`,
+    `${base}/juhi/PMN02925_2.jpg`,
+    `${base}/juhi/PMN03562.jpg`,
+    `${base}/juhi/DUC06717.jpg`,
   ],
-  countdownBg: "/juhi/PMN03044.jpg",
-  receptionCircle: "/juhi/PMN03369.jpg",
-  wishesBg: "/juhi/PMN02925_2.jpg",
-  thankyouBg: "/juhi/DUC06717.jpg",
+  countdownBg: `${base}/juhi/PMN03044.jpg`,
+  receptionCircle: `${base}/juhi/PMN03369.jpg`,
+  wishesBg: `${base}/juhi/PMN02925_2.jpg`,
+  thankyouBg: `${base}/juhi/DUC06717.jpg`,
 };
 
 const IconButton = ({
@@ -470,7 +472,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
           {isPlaying ? <FaPause /> : <FaPlay className="ml-0.5" />}
         </span>
       </button>
-      <audio ref={audioRef} src="/juhi/beautiful-in-white.mp3" loop preload="auto" />
+      <audio ref={audioRef} src={`${base}/juhi/beautiful-in-white.mp3`} loop preload="auto" />
     </div>
   );
 };

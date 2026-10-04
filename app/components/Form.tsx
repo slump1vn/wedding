@@ -28,7 +28,7 @@ const Form = () => {
       return;
     }
 
-    const response = await fetch("/api/submit", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/api/submit`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
