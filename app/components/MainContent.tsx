@@ -299,6 +299,31 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
           </section>
         )}
 
+        {/* GIỚI THIỆU */}
+        <section
+          ref={introRef}
+          className={`fadeInMove ${introInView ? "active" : ""} px-6 pt-6 pb-4`}
+        >
+          <h2 className="font-dancing text-4xl text-center text-[#343434]">
+            Giới Thiệu
+          </h2>
+          <PersonCard
+            label="chú rể"
+            photo={photos.groom}
+            name={config.groom}
+            father={config.groomFather}
+            mother={config.groomMother}
+          />
+          <PersonCard
+            label="cô dâu"
+            photo={photos.bride}
+            name={config.bride}
+            father={config.brideFather}
+            mother={config.brideMother}
+            reverse
+          />
+        </section>
+
         {/* HERO / SAVE THE DATE */}
         <section className="relative px-6 pt-6 pb-10 text-center">
           <div className="mx-auto max-w-sm rounded-t-[110px] rounded-b-3xl border border-sage/25 bg-white/50 backdrop-blur-sm pt-14 pb-8 px-6 relative">
@@ -340,31 +365,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
           <div className="absolute -bottom-4 left-0 w-24 md:w-32 aspect-[380/673] pointer-events-none select-none">
             <Image src="/juhi/bottom-left.png" alt="" fill className="object-contain" />
           </div>
-        </section>
-
-        {/* GIỚI THIỆU */}
-        <section
-          ref={introRef}
-          className={`fadeInMove ${introInView ? "active" : ""} px-6 pt-6 pb-4`}
-        >
-          <h2 className="font-dancing text-4xl text-center text-[#343434]">
-            Giới Thiệu
-          </h2>
-          <PersonCard
-            label="chú rể"
-            photo={photos.groom}
-            name={config.groom}
-            father={config.groomFather}
-            mother={config.groomMother}
-          />
-          <PersonCard
-            label="cô dâu"
-            photo={photos.bride}
-            name={config.bride}
-            father={config.brideFather}
-            mother={config.brideMother}
-            reverse
-          />
         </section>
 
         {/* ALBUM ẢNH */}
