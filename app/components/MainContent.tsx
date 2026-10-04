@@ -273,10 +273,10 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
     <div className={`relative min-h-dvh bg-pink-bg overflow-x-hidden ${fadeClass} transition-opacity duration-1000`}>
       {/* Decorative corner leaves */}
       <div className="absolute top-0 left-0 w-24 md:w-36 aspect-[152/166] pointer-events-none select-none z-0">
-        <Image src="/juhi/leaf-top.png" alt="" fill className="object-contain" />
+        <Image src={`${base}/juhi/leaf-top.png`} alt="" fill className="object-contain" />
       </div>
       <div className="absolute top-0 right-0 w-28 md:w-44 aspect-[320/394] pointer-events-none select-none z-0">
-        <Image src="/juhi/top-right.png" alt="" fill className="object-contain" />
+        <Image src={`${base}/juhi/top-right.png`} alt="" fill className="object-contain" />
       </div>
 
       <div className="max-w-md mx-auto relative z-10">
@@ -375,7 +375,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
             </div>
           </div>
           <div className="absolute -bottom-4 left-0 w-24 md:w-32 aspect-[380/673] pointer-events-none select-none">
-            <Image src="/juhi/bottom-left.png" alt="" fill className="object-contain" />
+            <Image src={`${base}/juhi/bottom-left.png`} alt="" fill className="object-contain" />
           </div>
         </section>
 
