@@ -199,6 +199,53 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Auto-scroll down slowly after 5s without interaction; any interaction stops it
+  useEffect(() => {
+    const IDLE_MS = 5000;
+    const SPEED = 40; // px per second
+    let idleTimer: ReturnType<typeof setTimeout> | undefined;
+    let raf = 0;
+    let last = 0;
+    let pos = 0;
+
+    const stop = () => {
+      clearTimeout(idleTimer);
+      cancelAnimationFrame(raf);
+    };
+
+    const step = (t: number) => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      pos += ((t - last) / 1000) * SPEED;
+      last = t;
+      if (pos >= max) {
+        window.scrollTo({ top: max, behavior: "instant" as ScrollBehavior });
+        return;
+      }
+      window.scrollTo({ top: pos, behavior: "instant" as ScrollBehavior });
+      raf = requestAnimationFrame(step);
+    };
+
+    const start = () => {
+      pos = window.scrollY;
+      last = performance.now();
+      raf = requestAnimationFrame(step);
+    };
+
+    const reset = () => {
+      stop();
+      idleTimer = setTimeout(start, IDLE_MS);
+    };
+
+    const events = ["wheel", "touchstart", "touchmove", "mousedown", "keydown"];
+    events.forEach((e) => window.addEventListener(e, reset, { passive: true }));
+    reset();
+
+    return () => {
+      stop();
+      events.forEach((e) => window.removeEventListener(e, reset));
+    };
+  }, []);
+
   const toggleMusic = () => {
     if (!audioRef.current) return;
     if (isPlaying) {
