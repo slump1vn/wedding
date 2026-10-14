@@ -18,6 +18,7 @@ import { config } from "@/lib/config";
 
 type ScheduleItem = {
   time: string;
+  at: string; // ISO, giờ Việt Nam (+07:00)
   text: string;
   link?: { label: string; href: string };
   highlight?: boolean;
@@ -27,43 +28,43 @@ const schedule: { day: string; items: ScheduleItem[]; note?: string }[] = [
   {
     day: "Thứ Bảy, 17/10/2026",
     items: [
-      { time: "7h45", text: "ĐÓN TẠI 180 ĐÌNH THÔN — xuất phát (xe 45 chỗ)", highlight: true },
-      { time: "8h30", text: "ĐÓN TẠI 156 LÊ TRỌNG TẤN — đón các bác Thường, Bích. Không ăn sáng dọc đường, đi thẳng tới Uông Bí", highlight: true },
+      { time: "7h45", at: "2026-10-17T07:45:00+07:00", text: "ĐÓN TẠI 180 ĐÌNH THÔN — xuất phát (xe 45 chỗ)", highlight: true },
+      { time: "8h30", at: "2026-10-17T08:30:00+07:00", text: "ĐÓN TẠI 156 LÊ TRỌNG TẤN — đón các bác Thường, Bích. Không ăn sáng dọc đường, đi thẳng tới Uông Bí", highlight: true },
       {
-        time: "11h30",
+        time: "11h30", at: "2026-10-17T11:30:00+07:00",
         text: "Ăn trưa tại nhà hàng Lê Vân, 171 Nam Khê, TP. Uông Bí, Quảng Ninh",
         link: { label: "Xem bản đồ", href: "https://maps.app.goo.gl/xMMpby9mt8DySstCA" },
       },
       {
-        time: "12h00",
+        time: "12h00", at: "2026-10-17T12:00:00+07:00",
         text: "Lấy phòng nghỉ, chỉnh trang trang phục tại Khách sạn Lê Vân",
         link: { label: "Xem bản đồ", href: "https://maps.app.goo.gl/HEURkredZVSE8vZs5" },
       },
       {
-        time: "13h00",
+        time: "13h00", at: "2026-10-17T13:00:00+07:00",
         text: "Di chuyển tới nhà cô dâu (Trưng Vương, Uông Bí), thực hiện lễ ăn hỏi",
         link: { label: "Xem bản đồ", href: "https://maps.app.goo.gl/oeUtKcNDmkFtVSAL9" },
       },
       {
-        time: "15h30",
+        time: "15h30", at: "2026-10-17T15:30:00+07:00",
         text: "Di chuyển tới Khách sạn Lê Vân (Phố Lê Hoàn, Vàng Danh, Quảng Ninh), dự lễ cưới",
         link: { label: "Xem bản đồ", href: "https://maps.app.goo.gl/HEURkredZVSE8vZs5" },
       },
-      { time: "Tối", text: "Sau bữa cơm, mọi người sinh hoạt tự do, nghỉ đêm tại Khách sạn Lê Vân" },
+      { time: "Tối", at: "2026-10-17T18:00:00+07:00", text: "Sau bữa cơm, mọi người sinh hoạt tự do, nghỉ đêm tại Khách sạn Lê Vân" },
     ],
   },
   {
     day: "Chủ Nhật, 18/10/2026",
     note: "Mọi người thu xếp trả phòng ở Lê Vân từ sáng, vì xe xuất phát sớm để kịp lễ đón dâu 7h.",
     items: [
-      { time: "7h00", text: "Lễ đón dâu tại nhà gái, Trưng Vương, Uông Bí" },
-      { time: "8h00", text: "Dự kiến xuất phát từ Uông Bí về Hà Nội" },
+      { time: "7h00", at: "2026-10-18T07:00:00+07:00", text: "Lễ đón dâu tại nhà gái, Trưng Vương, Uông Bí" },
+      { time: "8h00", at: "2026-10-18T08:00:00+07:00", text: "Dự kiến xuất phát từ Uông Bí về Hà Nội" },
       {
-        time: "10h30",
+        time: "10h30", at: "2026-10-18T10:30:00+07:00",
         text: "Dự kiến về tới 180 Đình Thôn",
         link: { label: "Xem bản đồ", href: "https://maps.app.goo.gl/9P2pWRUsH6YGKoVAA" },
       },
-      { time: "11h30", text: "Ăn cơm thân mật tại nhà hàng Vạn Hoa, 79 Lê Đức Thọ" },
+      { time: "11h30", at: "2026-10-18T11:30:00+07:00", text: "Ăn cơm thân mật tại nhà hàng Vạn Hoa, 79 Lê Đức Thọ" },
     ],
   },
 ];
@@ -282,6 +283,26 @@ const EventCard = ({
 const WeddingScreen = ({ name }: WeddingScreenProps) => {
   const [fadeClass, setFadeClass] = useState("opacity-0");
   const [isPlaying, setIsPlaying] = useState(false);
+  const [now, setNow] = useState<number | null>(null);
+
+  // Cập nhật theo thời gian thực để sắp xếp lại lịch trình
+  useEffect(() => {
+    setNow(Date.now());
+    const id = setInterval(() => setNow(Date.now()), 30000);
+    return () => clearInterval(id);
+  }, []);
+
+  const isPast = (it: ScheduleItem) => now !== null && new Date(it.at).getTime() < now;
+  const orderedSchedule = schedule
+    .map((d) => {
+      const upcoming = d.items.filter((it) => !isPast(it));
+      const past = d.items.filter(isPast);
+      return { ...d, items: [...upcoming, ...past], hasUpcoming: upcoming.length > 0 };
+    })
+    .sort((x, y) => Number(y.hasUpcoming) - Number(x.hasUpcoming));
+  const nextItem = orderedSchedule
+    .flatMap((d) => d.items)
+    .find((it) => !isPast(it));
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -378,14 +399,18 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
           <h2 className="font-playfair font-bold text-2xl text-center uppercase text-[#232323] mt-6 mb-5">
             Lịch Trình
           </h2>
-          {schedule.map((d) => (
+          {orderedSchedule.map((d) => (
             <div key={d.day} className="mb-6 rounded-3xl border border-sage/25 bg-white/50 p-5">
               <h3 className="font-playfair font-bold text-lg text-sage mb-3">{d.day}</h3>
               <ul className="space-y-3">
                 {d.items.map((it) => (
                   <li
                     key={it.time + it.text}
-                    className={`flex gap-3 ${
+                    className={`flex gap-3 transition-all duration-500 ${
+                      isPast(it) ? "opacity-40 grayscale" : ""
+                    } ${
+                      it === nextItem ? "ring-2 ring-sage/70 rounded-2xl p-2 -mx-2" : ""
+                    } ${
                       it.highlight
                         ? "rounded-2xl bg-sage/15 border border-sage/50 p-3 -mx-2 shadow-sm"
                         : ""
@@ -393,12 +418,18 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
                   >
                     <span className="w-14 shrink-0 font-quicksand font-bold text-sm text-[#232323]">
                       {it.time}
+                      {it === nextItem && (
+                        <span className="block text-[10px] uppercase tracking-wider text-sage">
+                          Sắp tới
+                        </span>
+                      )}
                     </span>
                     <span
                       className={`font-vietnam text-sm leading-relaxed ${
                         it.highlight ? "font-bold text-[#232323]" : "text-[#343434]"
                       }`}
                     >
+                      {isPast(it) && <span className="mr-1">✓</span>}
                       {it.text}
                       {it.link && (
                         <>
