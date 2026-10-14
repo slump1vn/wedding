@@ -29,8 +29,7 @@ const schedule: { day: string; items: ScheduleItem[]; note?: string }[] = [
   {
     day: "Thứ Bảy, 17/10/2026",
     items: [
-      { time: "7h45", at: "2026-10-17T07:45:00+07:00", text: "ĐÓN TẠI 180 ĐÌNH THÔN — xuất phát (xe 45 chỗ)", highlight: true },
-      { time: "8h30", at: "2026-10-17T08:30:00+07:00", text: "ĐÓN TẠI 156 LÊ TRỌNG TẤN — đón các bác Thường, Bích. Không ăn sáng dọc đường, đi thẳng tới Uông Bí", highlight: true },
+      { time: "7h45", at: "2026-10-17T07:45:00+07:00", text: "XUẤT PHÁT TẠI 180 ĐÌNH THÔN (xe 45 chỗ). Không ăn sáng dọc đường, đi thẳng tới Uông Bí", highlight: true },
       {
         time: "11h30", at: "2026-10-17T11:30:00+07:00",
         text: "Ăn trưa tại nhà hàng Lê Vân, 171 Nam Khê, TP. Uông Bí, Quảng Ninh",
