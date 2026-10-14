@@ -310,53 +310,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Auto-scroll down slowly after 5s without interaction; any interaction stops it
-  useEffect(() => {
-    const IDLE_MS = 5000;
-    const SPEED = 40; // px per second
-    let idleTimer: ReturnType<typeof setTimeout> | undefined;
-    let raf = 0;
-    let last = 0;
-    let pos = 0;
-
-    const stop = () => {
-      clearTimeout(idleTimer);
-      cancelAnimationFrame(raf);
-    };
-
-    const step = (t: number) => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      pos += ((t - last) / 1000) * SPEED;
-      last = t;
-      if (pos >= max) {
-        window.scrollTo({ top: max, behavior: "instant" as ScrollBehavior });
-        return;
-      }
-      window.scrollTo({ top: pos, behavior: "instant" as ScrollBehavior });
-      raf = requestAnimationFrame(step);
-    };
-
-    const start = () => {
-      pos = window.scrollY;
-      last = performance.now();
-      raf = requestAnimationFrame(step);
-    };
-
-    const reset = () => {
-      stop();
-      idleTimer = setTimeout(start, IDLE_MS);
-    };
-
-    const events = ["wheel", "touchstart", "touchmove", "mousedown", "keydown"];
-    events.forEach((e) => window.addEventListener(e, reset, { passive: true }));
-    reset();
-
-    return () => {
-      stop();
-      events.forEach((e) => window.removeEventListener(e, reset));
-    };
-  }, []);
-
   const toggleMusic = () => {
     if (!audioRef.current) return;
     if (isPlaying) {
@@ -389,14 +342,52 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
       </div>
 
       <div className="max-w-md mx-auto relative z-10">
+        {/* HERO / SAVE THE DATE */}
+        <section className="relative px-6 pt-20 pb-10 text-center">
+          <div className="mx-auto max-w-sm rounded-t-[110px] rounded-b-3xl border border-sage/25 bg-white/50 backdrop-blur-sm pt-14 pb-8 px-6 relative">
+            {name && (
+              <p className="font-quicksand text-xs uppercase tracking-[4px] text-[#6E6E6E] mb-2">
+                Kính gửi {name},
+              </p>
+            )}
+            <p className="font-quicksand text-xs uppercase tracking-[4px] text-[#6E6E6E]">
+              Save the Date
+            </p>
+            <h1 className="font-dancing text-4xl md:text-5xl text-[#232323] leading-tight mt-2">
+              {nameLine1}
+              <br />
+              &amp;
+              <br />
+              {nameLine2}
+            </h1>
+            <p className="font-vietnam text-xs text-[#6E6E6E] mt-4">Vào Lúc</p>
+            <p className="font-playfair text-xl text-[#343434]">
+              {holyMatrimonyDate.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}
+            </p>
+            <DateBreakdown date={holyMatrimonyDate} />
+            <h2 className="font-playfair font-bold text-xl uppercase text-[#232323]">
+              Lễ Vu Quy
+            </h2>
+            <p className="font-vietnam text-sm text-[#6E6E6E] mt-1">
+              {config.holyMatrimony.place}, {config.holyMatrimony.place_details}
+            </p>
+            <div className="flex justify-center gap-3 mt-4">
+              <IconButton onClick={() => document.getElementById("rsvp")?.scrollIntoView({ behavior: "smooth" })}>
+                <FaGift />
+              </IconButton>
+              <IconButton href={config.holyMatrimony.googleMapsLink}>
+                <FaMapMarkerAlt />
+              </IconButton>
+            </div>
+          </div>
+          <div className="absolute -bottom-4 left-0 w-24 md:w-32 aspect-[380/673] pointer-events-none select-none">
+            <Image src={`${base}/juhi/bottom-left.png`} alt="" fill className="object-contain" />
+          </div>
+        </section>
+
         {/* LỊCH TRÌNH & PHÂN CÔNG */}
-        <section className="px-6 pt-20 pb-6">
-          <p className="font-vietnam text-sm text-[#6E6E6E] text-center leading-relaxed">
-            Ngày 17/10 này có việc lớn, cần sự hiện diện của mọi người.
-            <br />
-            Kính nhờ các anh/em bố trí thời gian và địa điểm như sau:
-          </p>
-          <h2 className="font-playfair font-bold text-2xl text-center uppercase text-[#232323] mt-6 mb-5">
+        <section className="px-6 pt-6 pb-6">
+          <h2 className="font-playfair font-bold text-2xl text-center uppercase text-[#232323] mb-5">
             Lịch Trình
           </h2>
           {orderedSchedule.map((d) => (
@@ -535,49 +526,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
             mother={config.brideMother}
             reverse
           />
-        </section>
-
-        {/* HERO / SAVE THE DATE */}
-        <section className="relative px-6 pt-6 pb-10 text-center">
-          <div className="mx-auto max-w-sm rounded-t-[110px] rounded-b-3xl border border-sage/25 bg-white/50 backdrop-blur-sm pt-14 pb-8 px-6 relative">
-            {name && (
-              <p className="font-quicksand text-xs uppercase tracking-[4px] text-[#6E6E6E] mb-2">
-                Kính gửi {name},
-              </p>
-            )}
-            <p className="font-quicksand text-xs uppercase tracking-[4px] text-[#6E6E6E]">
-              Save the Date
-            </p>
-            <h1 className="font-dancing text-4xl md:text-5xl text-[#232323] leading-tight mt-2">
-              {nameLine1}
-              <br />
-              &amp;
-              <br />
-              {nameLine2}
-            </h1>
-            <p className="font-vietnam text-xs text-[#6E6E6E] mt-4">Vào Lúc</p>
-            <p className="font-playfair text-xl text-[#343434]">
-              {holyMatrimonyDate.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}
-            </p>
-            <DateBreakdown date={holyMatrimonyDate} />
-            <h2 className="font-playfair font-bold text-xl uppercase text-[#232323]">
-              Lễ Vu Quy
-            </h2>
-            <p className="font-vietnam text-sm text-[#6E6E6E] mt-1">
-              {config.holyMatrimony.place}, {config.holyMatrimony.place_details}
-            </p>
-            <div className="flex justify-center gap-3 mt-4">
-              <IconButton onClick={() => document.getElementById("rsvp")?.scrollIntoView({ behavior: "smooth" })}>
-                <FaGift />
-              </IconButton>
-              <IconButton href={config.holyMatrimony.googleMapsLink}>
-                <FaMapMarkerAlt />
-              </IconButton>
-            </div>
-          </div>
-          <div className="absolute -bottom-4 left-0 w-24 md:w-32 aspect-[380/673] pointer-events-none select-none">
-            <Image src={`${base}/juhi/bottom-left.png`} alt="" fill className="object-contain" />
-          </div>
         </section>
 
         {/* BỮA CƠM GIA ĐÌNH */}
