@@ -16,6 +16,91 @@ import Form from "./Form";
 import WishesList from "./WishesList";
 import { config } from "@/lib/config";
 
+type ScheduleItem = {
+  time: string;
+  text: string;
+  link?: { label: string; href: string };
+};
+
+const schedule: { day: string; items: ScheduleItem[]; note?: string }[] = [
+  {
+    day: "Thứ Bảy, 17/10/2026",
+    items: [
+      { time: "7h45", text: "Xuất phát tại 180 Đình Thôn (xe 45 chỗ)" },
+      { time: "8h30", text: "Đón các bác Thường, Bích tại 156 Lê Trọng Tấn. Không ăn sáng dọc đường, đi thẳng tới Uông Bí" },
+      {
+        time: "11h30",
+        text: "Ăn trưa tại nhà hàng Lê Vân, 171 Nam Khê, TP. Uông Bí, Quảng Ninh",
+        link: { label: "Xem bản đồ", href: "https://maps.app.goo.gl/xMMpby9mt8DySstCA" },
+      },
+      {
+        time: "12h00",
+        text: "Lấy phòng nghỉ, chỉnh trang trang phục tại Khách sạn Lê Vân",
+        link: { label: "Xem bản đồ", href: "https://maps.app.goo.gl/HEURkredZVSE8vZs5" },
+      },
+      {
+        time: "13h00",
+        text: "Di chuyển tới nhà cô dâu (Trưng Vương, Uông Bí), thực hiện lễ ăn hỏi",
+        link: { label: "Xem bản đồ", href: "https://maps.app.goo.gl/oeUtKcNDmkFtVSAL9" },
+      },
+      {
+        time: "15h30",
+        text: "Di chuyển tới Khách sạn Lê Vân (Phố Lê Hoàn, Vàng Danh, Quảng Ninh), dự lễ cưới",
+        link: { label: "Xem bản đồ", href: "https://maps.app.goo.gl/HEURkredZVSE8vZs5" },
+      },
+      { time: "Tối", text: "Sau bữa cơm, mọi người sinh hoạt tự do, nghỉ đêm tại Khách sạn Lê Vân" },
+    ],
+  },
+  {
+    day: "Chủ Nhật, 18/10/2026",
+    note: "Mọi người thu xếp trả phòng ở Lê Vân từ sáng, vì xe xuất phát sớm để kịp lễ đón dâu 7h.",
+    items: [
+      { time: "7h00", text: "Lễ đón dâu tại nhà gái, Trưng Vương, Uông Bí" },
+      { time: "8h00", text: "Dự kiến xuất phát từ Uông Bí về Hà Nội" },
+      {
+        time: "10h30",
+        text: "Dự kiến về tới 180 Đình Thôn",
+        link: { label: "Xem bản đồ", href: "https://maps.app.goo.gl/9P2pWRUsH6YGKoVAA" },
+      },
+      { time: "11h30", text: "Ăn cơm thân mật tại nhà hàng Vạn Hoa, 79 Lê Đức Thọ" },
+    ],
+  },
+];
+
+const duties: { title: string; items: { task: string; who: string }[] }[] = [
+  { title: "Xe chung", items: [{ task: "Phụ trách xe (đi, đón, số lượng)", who: "Anh Cường" }] },
+  {
+    title: "Lễ ăn hỏi",
+    items: [
+      { task: "Xe cưới", who: "Đỗ Chính" },
+      { task: "Dẫn đầu đoàn bê tráp nhà trai", who: "Sơn em" },
+      { task: "Bắn pháo hoa", who: "Tú em, Quân Giấy" },
+    ],
+  },
+  {
+    title: "Lễ cưới",
+    items: [
+      { task: "Dẫn khách vào nhà trai (đội bóng & bạn bè)", who: "Anh Cường, Đỗ Chính, Vũ" },
+      { task: "Trình chiếu, phát nhạc", who: "Quân Giấy" },
+    ],
+  },
+  {
+    title: "Lễ đón dâu",
+    items: [
+      { task: "Bắn pháo hoa", who: "Tú em, Quân Giấy" },
+      { task: "Lái xe dâu", who: "Anh Lâm" },
+    ],
+  },
+  {
+    title: "Tại 180 Đình Thôn",
+    items: [
+      { task: "Bắn pháo hoa (nếu còn)", who: "Tú em, Quân Giấy" },
+      { task: "Rót nước chè", who: "Tú em, Sơn em" },
+      { task: "Chụp ảnh", who: "Vũ" },
+    ],
+  },
+];
+
 type WeddingScreenProps = {
   name?: string;
 };
@@ -383,6 +468,86 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
             lunarDate="Tức ngày 09 tháng 09 năm Bính Ngọ"
             googleMapsLink="https://www.google.com/maps/search/?api=1&query=Nh%C3%A0+h%C3%A0ng+V%E1%BA%A1n+Hoa+79+L%C3%AA+%C4%90%E1%BB%A9c+Th%E1%BB%8D"
           />
+        </section>
+
+        {/* LỊCH TRÌNH & PHÂN CÔNG */}
+        <section className="px-6 py-6">
+          <p className="font-vietnam text-sm text-[#6E6E6E] text-center leading-relaxed">
+            Ngày 17/10 này có việc lớn, cần sự hiện diện của mọi người.
+            <br />
+            Kính nhờ các anh/em bố trí thời gian và địa điểm như sau:
+          </p>
+          <h2 className="font-playfair font-bold text-2xl text-center uppercase text-[#232323] mt-6 mb-5">
+            Lịch Trình
+          </h2>
+          {schedule.map((d) => (
+            <div key={d.day} className="mb-6 rounded-3xl border border-sage/25 bg-white/50 p-5">
+              <h3 className="font-playfair font-bold text-lg text-sage mb-3">{d.day}</h3>
+              <ul className="space-y-3">
+                {d.items.map((it) => (
+                  <li key={it.time + it.text} className="flex gap-3">
+                    <span className="w-14 shrink-0 font-quicksand font-bold text-sm text-[#232323]">
+                      {it.time}
+                    </span>
+                    <span className="font-vietnam text-sm text-[#343434] leading-relaxed">
+                      {it.text}
+                      {it.link && (
+                        <>
+                          {" "}
+                          <a
+                            href={it.link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sage underline"
+                          >
+                            {it.link.label}
+                          </a>
+                        </>
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              {d.note && (
+                <p className="font-vietnam text-xs italic text-[#6E6E6E] mt-4 border-t border-sage/20 pt-3">
+                  Lưu ý: {d.note}
+                </p>
+              )}
+            </div>
+          ))}
+
+          <h2 className="font-playfair font-bold text-2xl text-center uppercase text-[#232323] mt-8 mb-5">
+            Phân Công
+          </h2>
+          <div className="rounded-3xl border border-sage/25 bg-white/50 p-5 space-y-5">
+            {duties.map((g) => (
+              <div key={g.title}>
+                <h3 className="font-playfair font-bold text-base text-sage mb-2">{g.title}</h3>
+                <ul className="space-y-1">
+                  {g.items.map((it) => (
+                    <li
+                      key={it.task}
+                      className="flex justify-between gap-3 font-vietnam text-sm text-[#343434]"
+                    >
+                      <span>{it.task}</span>
+                      <span className="font-bold text-right shrink-0">{it.who}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+            <p className="font-vietnam text-xs text-[#6E6E6E] border-t border-sage/20 pt-3">
+              Link phát nhạc:{" "}
+              <a
+                href="https://ss.digifusion.vn/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sage underline"
+              >
+                ss.digifusion.vn
+              </a>
+            </p>
+          </div>
         </section>
 
         {/* ALBUM ẢNH */}
