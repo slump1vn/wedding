@@ -7,6 +7,7 @@ import { useInView } from "react-intersection-observer";
 import {
   FaGift,
   FaMapMarkerAlt,
+  FaPhoneAlt,
   FaHeart,
   FaPlay,
   FaPause,
@@ -70,7 +71,7 @@ const schedule: { day: string; items: ScheduleItem[]; note?: string }[] = [
 ];
 
 const duties: { title: string; items: { task: string; who: string }[] }[] = [
-  { title: "Xe chung", items: [{ task: "Phụ trách xe (đi, đón, số lượng)", who: "Anh Cường" }] },
+  { title: "Xe chung", items: [{ task: "Phụ trách xe (đi, đón, số lượng)", who: "Anh Cường – 0935 539 133" }] },
   {
     title: "Lễ ăn hỏi",
     items: [
@@ -389,6 +390,15 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
           <h2 className="font-playfair font-bold text-2xl text-center uppercase text-[#232323] mb-5">
             Lịch Trình
           </h2>
+          <a
+            href="tel:0935539133"
+            className="mb-5 flex items-center justify-center gap-2 rounded-2xl border border-sage/50 bg-sage/15 px-4 py-3 font-vietnam text-sm text-[#232323]"
+          >
+            <FaPhoneAlt className="text-sage" />
+            <span>
+              Liên hệ xe đón: <strong>Anh Cường – 0935 539 133</strong>
+            </span>
+          </a>
           {orderedSchedule.map((d) => (
             <div key={d.day} className="mb-6 rounded-3xl border border-sage/25 bg-white/50 p-5">
               <h3 className="font-playfair font-bold text-lg text-sage mb-3">{d.day}</h3>
