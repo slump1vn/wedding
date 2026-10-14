@@ -321,7 +321,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
   };
 
   const eventDate = new Date(config.eventDate);
-  const holyMatrimonyDate = new Date(config.holyMatrimony.date);
   const vanHoaDate = new Date("2026-10-18T11:30:00");
   const [nameLine1, nameLine2] = config.coupleNames.split(" & ");
 
@@ -362,20 +361,20 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
             </h1>
             <p className="font-vietnam text-xs text-[#6E6E6E] mt-4">Vào Lúc</p>
             <p className="font-playfair text-xl text-[#343434]">
-              {holyMatrimonyDate.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}
+              {eventDate.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}
             </p>
-            <DateBreakdown date={holyMatrimonyDate} />
+            <DateBreakdown date={eventDate} />
             <h2 className="font-playfair font-bold text-xl uppercase text-[#232323]">
-              Lễ Vu Quy
+              Lễ Cưới
             </h2>
             <p className="font-vietnam text-sm text-[#6E6E6E] mt-1">
-              {config.holyMatrimony.place}, {config.holyMatrimony.place_details}
+              {config.weddingReception.place}, {config.weddingReception.place_details}
             </p>
             <div className="flex justify-center gap-3 mt-4">
               <IconButton onClick={() => document.getElementById("rsvp")?.scrollIntoView({ behavior: "smooth" })}>
                 <FaGift />
               </IconButton>
-              <IconButton href={config.holyMatrimony.googleMapsLink}>
+              <IconButton href={config.weddingReception.googleMapsLink}>
                 <FaMapMarkerAlt />
               </IconButton>
             </div>
