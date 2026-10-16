@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Schedule from "../components/Schedule";
+import LiveTracker from "../components/LiveTracker";
 import { config } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -31,6 +32,8 @@ export default function SchedulePage() {
             {config.coupleNames}
           </h1>
         </header>
+
+        <LiveTracker />
 
         <Schedule />
 
