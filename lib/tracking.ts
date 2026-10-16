@@ -5,7 +5,7 @@ export const TRACKING_START = new Date("2026-10-17T05:00:00+07:00");
 export const TRACKING_END = new Date("2026-10-18T13:00:00+07:00");
 
 // Link "Chia sẻ vị trí" của Google Maps, dùng làm phương án dự phòng. Để trống thì ẩn nút.
-export const GOOGLE_LIVE_LOCATION_LINK = "";
+export const GOOGLE_LIVE_LOCATION_LINK = "https://maps.app.goo.gl/mWxwd4g5cubv9pAHA";
 
 // Các điểm dừng có toạ độ (lấy từ link Google Maps trong lịch trình), theo thứ tự thời gian
 export const stops = [
