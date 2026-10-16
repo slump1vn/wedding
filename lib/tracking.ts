@@ -1,7 +1,7 @@
 // Cấu hình theo dõi vị trí xe đoàn nhà trai
 
 // Ngoài khoảng này bản đồ công khai không hiện vị trí (tránh lộ vị trí trước/sau chuyến đi)
-export const TRACKING_START = new Date("2026-10-17T05:00:00+07:00");
+export const TRACKING_START = new Date("2026-10-17T06:30:00+07:00");
 export const TRACKING_END = new Date("2026-10-18T13:00:00+07:00");
 
 // Link "Chia sẻ vị trí" của Google Maps, dùng làm phương án dự phòng. Để trống thì ẩn nút.
