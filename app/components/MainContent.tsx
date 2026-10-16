@@ -14,6 +14,7 @@ import {
 import CountdownTimer from "./Countdown";
 import Form from "./Form";
 import WishesList from "./WishesList";
+import AlbumGrid from "./AlbumGrid";
 import { config } from "@/lib/config";
 
 type WeddingScreenProps = {
@@ -375,15 +376,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
           <h2 className="font-playfair font-bold text-2xl text-center uppercase text-[#232323] mb-5">
             Album Ảnh
           </h2>
-          <div className="grid grid-cols-2 gap-2">
-            {photos.album.map((src) => (
-              <div
-                key={src}
-                className="bg-cover bg-center rounded-md aspect-[3/4]"
-                style={{ backgroundImage: `url(${src})` }}
-              />
-            ))}
-          </div>
+          <AlbumGrid photos={photos.album} />
         </section>
 
         {/* ĐẾM NGƯỢC */}
