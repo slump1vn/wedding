@@ -10,7 +10,7 @@ export const GOOGLE_LIVE_LOCATION_LINK = "https://maps.app.goo.gl/mWxwd4g5cubv9p
 // Các điểm dừng có toạ độ (lấy từ link Google Maps trong lịch trình), theo thứ tự thời gian
 export const stops = [
   { name: "180 Đình Thôn", at: "2026-10-17T07:45:00+07:00", lat: 21.0188951, lon: 105.7718052 },
-  { name: "Nhà hàng Lê Vân", at: "2026-10-17T11:30:00+07:00", lat: 21.0210862, lon: 106.8120265 },
+  { name: "Nhà hàng Lê Vân", at: "2026-10-17T11:00:00+07:00", lat: 21.0210862, lon: 106.8120265 },
   { name: "Khách sạn Lê Vân", at: "2026-10-17T12:00:00+07:00", lat: 21.0234087, lon: 106.810401 },
   { name: "Nhà cô dâu", at: "2026-10-17T13:00:00+07:00", lat: 21.0271952, lon: 106.7979696 },
   { name: "Khách sạn Lê Vân", at: "2026-10-17T15:30:00+07:00", lat: 21.0234087, lon: 106.810401 },
