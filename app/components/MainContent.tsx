@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
-import { FaPlay, FaPause } from "react-icons/fa";
 import WishesList from "./WishesList";
 import AlbumGrid from "./AlbumGrid";
 import WeddingPhotos from "./WeddingPhotos";
@@ -41,23 +40,11 @@ const SectionTitle = ({ children }: { children: React.ReactNode }) => (
 // Thiệp cảm ơn gửi tới khách đã đến dự lễ cưới
 const WeddingScreen = ({ name }: WeddingScreenProps) => {
   const [fadeClass, setFadeClass] = useState("opacity-0");
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setFadeClass("opacity-100"), 300);
     return () => clearTimeout(timer);
   }, []);
-
-  const toggleMusic = () => {
-    if (!audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play().catch(() => {});
-    }
-    setIsPlaying(!isPlaying);
-  };
 
   const eventDate = new Date(config.eventDate);
   const [nameLine1, nameLine2] = config.coupleNames.split(" & ");
@@ -164,18 +151,6 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
           </div>
         </section>
       </div>
-
-      {/* Floating music toggle */}
-      <button
-        onClick={toggleMusic}
-        className="fixed bottom-5 left-5 z-50 w-12 h-12 rounded-full bg-[#E96D5A] text-white shadow-lg flex items-center justify-center"
-        aria-label="Bật/tắt nhạc nền"
-      >
-        <span className={isPlaying ? "spin-slow" : ""}>
-          {isPlaying ? <FaPause /> : <FaPlay className="ml-0.5" />}
-        </span>
-      </button>
-      <audio ref={audioRef} src="/juhi/beautiful-in-white.mp3" loop preload="auto" />
     </div>
   );
 };
