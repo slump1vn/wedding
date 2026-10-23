@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 import WishesList from "./WishesList";
-import AlbumGrid from "./AlbumGrid";
 import WeddingPhotos from "./WeddingPhotos";
 import VideoPlayer from "./VideoPlayer";
 import { config } from "@/lib/config";
@@ -14,14 +13,6 @@ type WeddingScreenProps = {
 };
 
 const photos = {
-  album: [
-    "/juhi/PMN02276.jpg",
-    "/juhi/DUC06202.jpg",
-    "/juhi/PMN03369.jpg",
-    "/juhi/PMN02925_2.jpg",
-    "/juhi/PMN03562.jpg",
-    "/juhi/DUC06717.jpg",
-  ],
   thankyouBg: "/juhi/DUC06717.jpg",
 };
 
@@ -108,13 +99,12 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
           <VideoPlayer {...videos.intro} title="Video giới thiệu" />
         </section>
 
-        {/* ALBUM ẢNH */}
+        {/* ẢNH LỄ CƯỚI */}
         <section
           ref={albumRef}
           className={`fadeInMove ${albumInView ? "active" : ""} px-6 py-10`}
         >
-          <SectionTitle>Album Ảnh</SectionTitle>
-          <AlbumGrid photos={photos.album} />
+          <SectionTitle>Ảnh Lễ Cưới</SectionTitle>
           <WeddingPhotos />
         </section>
 

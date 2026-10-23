@@ -27,10 +27,7 @@ const WeddingPhotos = () => {
   const files = urls.map((_, i) => `${String(i + 1).padStart(3, "0")}.jpg`);
 
   return (
-    <div className="mt-8">
-      <h3 className="font-playfair font-bold text-xl text-center text-[#232323] mb-4">
-        Ảnh Lễ Cưới
-      </h3>
+    <div>
       <AlbumGrid
         photos={files.map((f) => `${base}/wedding-photos/thumb/${f}`)}
         fullPhotos={files.map((f) => `${base}/wedding-photos/full/${f}`)}
