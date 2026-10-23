@@ -5,6 +5,9 @@ services:
       - "3000:3000"
     env_file:
       - .env
+    volumes:
+      # Ảnh lễ cưới tải về server (xem public/wedding/photos.json)
+      - ${WEDDING_PHOTOS_DIR:-./photos}:/photos:ro
     depends_on:
       - mongo
     restart: unless-stopped

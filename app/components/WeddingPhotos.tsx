@@ -10,7 +10,8 @@ export const GOOGLE_PHOTOS_ALBUM =
 
 const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
-// Ảnh lễ cưới lấy trực tiếp từ Google Photos; danh sách link nằm ở public/wedding/photos.json
+// Ảnh lễ cưới: danh sách link Google Photos nằm ở public/wedding/photos.json,
+// ảnh đã được tải về server và phục vụ qua /wedding-photos/{thumb,full}/NNN.jpg
 const WeddingPhotos = () => {
   const [urls, setUrls] = useState<string[]>([]);
 
@@ -22,6 +23,8 @@ const WeddingPhotos = () => {
   }, []);
 
   if (urls.length === 0) return null;
+  // Ảnh đã tải về server, đặt tên theo thứ tự trong photos.json: 001.jpg, 002.jpg, ...
+  const files = urls.map((_, i) => `${String(i + 1).padStart(3, "0")}.jpg`);
 
   return (
     <div className="mt-8">
@@ -29,8 +32,8 @@ const WeddingPhotos = () => {
         Ảnh Lễ Cưới
       </h3>
       <AlbumGrid
-        photos={urls.map((u) => `${u}=w400-h533-c`)}
-        fullPhotos={urls.map((u) => `${u}=w2048-h2048`)}
+        photos={files.map((f) => `${base}/wedding-photos/thumb/${f}`)}
+        fullPhotos={files.map((f) => `${base}/wedding-photos/full/${f}`)}
         pageSize={24}
         cols={3}
       />

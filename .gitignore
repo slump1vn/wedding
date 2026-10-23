@@ -36,3 +36,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ảnh lễ cưới tải về server, không đưa vào git
+/photos
