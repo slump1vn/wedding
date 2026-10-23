@@ -86,7 +86,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
             </h1>
             <p className="font-playfair text-lg text-brown mt-3">{dateText}</p>
             <p className="font-dancing text-3xl text-sage mt-6">
-              Thân gửi {name || "quý khách"},
+              Trân trọng cảm ơn{name ? ` ${name}` : ""}
             </p>
             <p className="font-vietnam text-sm text-[#343434] leading-relaxed mt-3">
               Cảm ơn bạn đã dành thời gian đến chung vui trong ngày trọng đại của chúng tôi. Sự hiện
