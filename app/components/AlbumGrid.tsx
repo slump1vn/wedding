@@ -6,11 +6,17 @@ import { FaChevronLeft, FaChevronRight, FaTimes } from "react-icons/fa";
 
 type AlbumGridProps = {
   photos: string[];
+  // Ảnh độ phân giải cao để xem toàn màn hình (mặc định dùng chính `photos`)
+  fullPhotos?: string[];
+  // Số ảnh hiện mỗi lần, có nút "Xem thêm" (mặc định hiện tất cả)
+  pageSize?: number;
+  cols?: 2 | 3;
 };
 
 // Lưới ảnh album; bấm vào ảnh để xem toàn màn hình, vuốt hoặc dùng phím mũi tên để chuyển ảnh
-const AlbumGrid = ({ photos }: AlbumGridProps) => {
+const AlbumGrid = ({ photos, fullPhotos, pageSize, cols = 2 }: AlbumGridProps) => {
   const [index, setIndex] = useState<number | null>(null);
+  const [shown, setShown] = useState(pageSize ?? photos.length);
   const touchX = useRef<number | null>(null);
 
   const close = useCallback(() => setIndex(null), []);
@@ -39,18 +45,35 @@ const AlbumGrid = ({ photos }: AlbumGridProps) => {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-2">
-        {photos.map((src, i) => (
+      <div className={`grid ${cols === 3 ? "grid-cols-3 gap-1.5" : "grid-cols-2 gap-2"}`}>
+        {photos.slice(0, shown).map((src, i) => (
           <button
             key={src}
             type="button"
             onClick={() => setIndex(i)}
             aria-label={`Xem ảnh ${i + 1}`}
-            className="bg-cover bg-center rounded-md aspect-[3/4] cursor-zoom-in"
-            style={{ backgroundImage: `url(${src})` }}
-          />
+            className="rounded-md aspect-[3/4] overflow-hidden bg-sage/10 cursor-zoom-in"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={src}
+              alt=""
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              className="h-full w-full object-cover"
+            />
+          </button>
         ))}
       </div>
+      {shown < photos.length && pageSize && (
+        <button
+          type="button"
+          onClick={() => setShown((n) => Math.min(n + pageSize, photos.length))}
+          className="mt-4 w-full rounded-2xl border border-sage/50 bg-sage/15 px-4 py-3 font-vietnam text-sm text-[#232323]"
+        >
+          Xem thêm ảnh ({photos.length - shown} ảnh nữa)
+        </button>
+      )}
 
       {/* Render ra body để không bị giới hạn bởi transform của khối cha */}
       {index !== null &&
@@ -70,7 +93,8 @@ const AlbumGrid = ({ photos }: AlbumGridProps) => {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={photos[index]}
+              src={(fullPhotos ?? photos)[index]}
+              referrerPolicy="no-referrer"
               alt={`Ảnh ${index + 1}`}
               className="max-h-full max-w-full object-contain select-none"
               onClick={(e) => e.stopPropagation()}

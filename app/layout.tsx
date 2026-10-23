@@ -30,7 +30,7 @@ const quicksand = Quicksand({
 
 export const metadata: Metadata = {
   title: `The Wedding of ${config.coupleNames}`,
-  description: `Wedding Invitation of ${config.coupleNames}`,
+  description: `Lời cảm ơn từ ${config.coupleNames}`,
 };
 
 export default function RootLayout({
