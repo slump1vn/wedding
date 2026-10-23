@@ -80,7 +80,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
               Trân trọng cảm ơn{name ? ` ${name}` : ""}
             </p>
             <p className="font-vietnam text-sm text-[#343434] leading-relaxed mt-3">
-              Cảm ơn bạn đã dành thời gian đến chung vui trong ngày trọng đại của chúng tôi. Sự hiện
+              Cảm ơn quý anh/chị đã dành thời gian đến chung vui trong ngày trọng đại của chúng tôi. Sự hiện
               diện và những lời chúc phúc của mọi người là món quà ý nghĩa nhất, giúp ngày cưới của
               chúng tôi thêm trọn vẹn.
             </p>
