@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { FaChevronLeft, FaChevronRight, FaTimes } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaDownload, FaTimes } from "react-icons/fa";
 
 type AlbumGridProps = {
   photos: string[];
@@ -13,10 +13,44 @@ type AlbumGridProps = {
   cols?: 2 | 3;
 };
 
+// Lưu ảnh về máy: trên điện thoại mở bảng chia sẻ (iPhone: "Lưu hình ảnh" vào app Ảnh),
+// trình duyệt không hỗ trợ chia sẻ file thì tải file về như bình thường
+const loadBlob = (src: string) => fetch(src).then((r) => r.blob());
+
+const savePhoto = async (blob: Blob, name: string) => {
+  const file = new File([blob], name, { type: blob.type || "image/jpeg" });
+  if (navigator.canShare?.({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file] });
+    } catch {
+      // người dùng đóng bảng chia sẻ
+    }
+    return;
+  }
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+};
+
 // Lưới ảnh album; bấm vào ảnh để xem toàn màn hình, vuốt hoặc dùng phím mũi tên để chuyển ảnh
 const AlbumGrid = ({ photos, fullPhotos, pageSize, cols = 2 }: AlbumGridProps) => {
   const [index, setIndex] = useState<number | null>(null);
   const [shown, setShown] = useState(pageSize ?? photos.length);
+  const [saving, setSaving] = useState(false);
+  // Ảnh đang xem được tải sẵn để bấm "Lưu ảnh" mở bảng chia sẻ ngay (Safari yêu cầu gọi
+  // share() ngay sau thao tác bấm, không được chờ tải ảnh)
+  const prefetched = useRef<{ src: string; blob: Promise<Blob> } | null>(null);
+  const current = index === null ? null : (fullPhotos ?? photos)[index];
+
+  useEffect(() => {
+    if (!current) return;
+    const blob = loadBlob(current);
+    blob.catch(() => {});
+    prefetched.current = { src: current, blob };
+  }, [current]);
   const touchX = useRef<number | null>(null);
 
   const close = useCallback(() => setIndex(null), []);
@@ -93,12 +127,31 @@ const AlbumGrid = ({ photos, fullPhotos, pageSize, cols = 2 }: AlbumGridProps) =
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={(fullPhotos ?? photos)[index]}
+              src={current ?? undefined}
               referrerPolicy="no-referrer"
               alt={`Ảnh ${index + 1}`}
               className="max-h-full max-w-full object-contain select-none"
               onClick={(e) => e.stopPropagation()}
             />
+            <button
+              type="button"
+              disabled={saving}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (!current) return;
+                const blob =
+                  prefetched.current?.src === current ? prefetched.current.blob : loadBlob(current);
+                setSaving(true);
+                blob
+                  .then((b) => savePhoto(b, `anh-cuoi-${String(index + 1).padStart(3, "0")}.jpg`))
+                  .catch(() => window.open(current, "_blank"))
+                  .finally(() => setSaving(false));
+              }}
+              className="absolute top-4 left-4 flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 font-vietnam text-sm text-white disabled:opacity-60"
+            >
+              <FaDownload />
+              {saving ? "Đang tải..." : "Lưu ảnh"}
+            </button>
             <button
               type="button"
               onClick={close}

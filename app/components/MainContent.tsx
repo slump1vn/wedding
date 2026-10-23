@@ -6,7 +6,7 @@ import { useInView } from "react-intersection-observer";
 import WishesList from "./WishesList";
 import AlbumGrid from "./AlbumGrid";
 import WeddingPhotos from "./WeddingPhotos";
-import DriveVideo from "./DriveVideo";
+import VideoPlayer from "./VideoPlayer";
 import { config } from "@/lib/config";
 
 type WeddingScreenProps = {
@@ -25,10 +25,12 @@ const photos = {
   thankyouBg: "/juhi/DUC06717.jpg",
 };
 
-// Video trên Google Drive
+// Video tải từ Google Drive về server (thư mục videos trong WEDDING_PHOTOS_DIR)
+//   intro.mp4:   drive.google.com/file/d/1EQId2kpnmZ51pJgmqBk8VPKIWs4OowZy
+//   wedding.mp4: drive.google.com/file/d/16F3ZtP8Fw_oz1n_TJu8HsGQ9dzo8aJfP
 const videos = {
-  intro: "1EQId2kpnmZ51pJgmqBk8VPKIWs4OowZy",
-  wedding: "16F3ZtP8Fw_oz1n_TJu8HsGQ9dzo8aJfP",
+  intro: { src: "/wedding-videos/intro.mp4", poster: "/juhi/PMN03044.jpg" },
+  wedding: { src: "/wedding-videos/wedding.mp4", poster: "/juhi/DUC06202.jpg" },
 };
 
 const SectionTitle = ({ children }: { children: React.ReactNode }) => (
@@ -103,7 +105,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
           className={`fadeInMove ${introInView ? "active" : ""} px-6 pt-6 pb-4`}
         >
           <SectionTitle>Video Giới Thiệu</SectionTitle>
-          <DriveVideo id={videos.intro} title="Video giới thiệu" />
+          <VideoPlayer {...videos.intro} title="Video giới thiệu" />
         </section>
 
         {/* ALBUM ẢNH */}
@@ -122,7 +124,7 @@ const WeddingScreen = ({ name }: WeddingScreenProps) => {
           className={`fadeInMove ${videoInView ? "active" : ""} px-6 pb-6`}
         >
           <SectionTitle>Video Lễ Cưới</SectionTitle>
-          <DriveVideo id={videos.wedding} title="Video lễ cưới" />
+          <VideoPlayer {...videos.wedding} title="Video lễ cưới" />
         </section>
 
         {/* LỜI CHÚC */}
