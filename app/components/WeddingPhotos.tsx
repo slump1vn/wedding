@@ -81,7 +81,7 @@ const WeddingPhotos = () => {
           </div>
 
           <p className="text-xs font-vietnam text-[#6E6E6E] mb-3 px-1">
-            Nhận diện từng khách mời (đã tự động lọc bỏ cô dâu & chú rể). Bấm vào khuôn mặt để xem toàn bộ ảnh có mặt người đó:
+            Bấm vào ảnh đại diện để xem toàn bộ ảnh có mặt người đó:
           </p>
 
           {/* Dải avatar từng người cuộn ngang */}
@@ -124,7 +124,7 @@ const WeddingPhotos = () => {
               </span>
             </button>
 
-            {/* Avatar từng cá nhân được AI nhận dạng */}
+            {/* Avatar từng cá nhân được AI nhận dạng (đã bỏ dòng chữ khách mời) */}
             {people.map((person) => {
               const isSelected = selectedPerson?.id === person.id;
               return (
@@ -146,7 +146,7 @@ const WeddingPhotos = () => {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={`${base}${person.avatar}`}
-                      alt={person.name}
+                      alt=""
                       className="h-full w-full object-cover"
                       loading="lazy"
                     />
@@ -157,16 +157,12 @@ const WeddingPhotos = () => {
                     )}
                   </div>
                   <span
-                    className={`mt-1.5 text-xs font-vietnam max-w-[76px] truncate text-center transition-colors ${
+                    className={`mt-1.5 text-[11px] font-quicksand transition-colors ${
                       isSelected
                         ? "font-semibold text-sage"
-                        : "text-[#444444]"
+                        : "text-[#666666]"
                     }`}
-                    title={person.name}
                   >
-                    {person.name}
-                  </span>
-                  <span className="text-[10px] font-quicksand text-[#888888]">
                     {person.count} ảnh
                   </span>
                 </button>
@@ -178,12 +174,9 @@ const WeddingPhotos = () => {
           {selectedPerson && (
             <div className="mt-3 flex items-center justify-between rounded-xl bg-sage/10 px-3 py-2 text-xs font-vietnam text-[#333]">
               <div className="flex items-center gap-1.5">
-                <span className="text-sage font-medium">Đang xem ảnh của:</span>
+                <span className="text-sage font-medium">Đang xem:</span>
                 <span className="font-semibold text-[#222]">
-                  {selectedPerson.name}
-                </span>
-                <span className="text-[#666]">
-                  ({selectedPerson.count} ảnh)
+                  {selectedPerson.count} ảnh của người này
                 </span>
               </div>
               <button
