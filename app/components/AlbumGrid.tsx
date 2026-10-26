@@ -40,6 +40,13 @@ const AlbumGrid = ({ photos, fullPhotos, pageSize, cols = 2 }: AlbumGridProps) =
   const [index, setIndex] = useState<number | null>(null);
   const [shown, setShown] = useState(pageSize ?? photos.length);
   const [saving, setSaving] = useState(false);
+
+  // Reset số lượng ảnh hiển thị khi danh sách ảnh thay đổi (khi filter nhân vật)
+  useEffect(() => {
+    setShown(pageSize ?? photos.length);
+    setIndex(null);
+  }, [photos, pageSize]);
+
   // Ảnh đang xem được tải sẵn để bấm "Lưu ảnh" mở bảng chia sẻ ngay (Safari yêu cầu gọi
   // share() ngay sau thao tác bấm, không được chờ tải ảnh)
   const prefetched = useRef<{ src: string; blob: Promise<Blob> } | null>(null);
@@ -77,6 +84,14 @@ const AlbumGrid = ({ photos, fullPhotos, pageSize, cols = 2 }: AlbumGridProps) =
     };
   }, [index, close, step]);
 
+  if (photos.length === 0) {
+    return (
+      <div className="py-12 text-center text-[#7D7D7D] font-vietnam text-sm bg-sage/5 rounded-2xl border border-dashed border-sage/30">
+        Không tìm thấy bức ảnh nào phù hợp.
+      </div>
+    );
+  }
+
   return (
     <>
       <div className={`grid ${cols === 3 ? "grid-cols-3 gap-1.5" : "grid-cols-2 gap-2"}`}>
@@ -86,7 +101,7 @@ const AlbumGrid = ({ photos, fullPhotos, pageSize, cols = 2 }: AlbumGridProps) =
             type="button"
             onClick={() => setIndex(i)}
             aria-label={`Xem ảnh ${i + 1}`}
-            className="rounded-md aspect-[3/4] overflow-hidden bg-sage/10 cursor-zoom-in"
+            className="rounded-md aspect-[3/4] overflow-hidden bg-sage/10 cursor-zoom-in transition-transform duration-200 active:scale-95"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -103,7 +118,7 @@ const AlbumGrid = ({ photos, fullPhotos, pageSize, cols = 2 }: AlbumGridProps) =
         <button
           type="button"
           onClick={() => setShown((n) => Math.min(n + pageSize, photos.length))}
-          className="mt-4 w-full rounded-2xl border border-sage/50 bg-sage/15 px-4 py-3 font-vietnam text-sm text-[#232323]"
+          className="mt-4 w-full rounded-2xl border border-sage/50 bg-sage/15 px-4 py-3 font-vietnam text-sm text-[#232323] transition-colors hover:bg-sage/25"
         >
           Xem thêm ảnh ({photos.length - shown} ảnh nữa)
         </button>
@@ -115,7 +130,7 @@ const AlbumGrid = ({ photos, fullPhotos, pageSize, cols = 2 }: AlbumGridProps) =
           <div
             role="dialog"
             aria-modal="true"
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm"
             onClick={close}
             onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
             onTouchEnd={(e) => {
@@ -142,12 +157,16 @@ const AlbumGrid = ({ photos, fullPhotos, pageSize, cols = 2 }: AlbumGridProps) =
                 const blob =
                   prefetched.current?.src === current ? prefetched.current.blob : loadBlob(current);
                 setSaving(true);
+                const rawName = current.split("/").pop()?.split("?")[0];
+                const saveName = rawName && /^\d{3}\.jpg$/.test(rawName)
+                  ? `anh-cuoi-${rawName}`
+                  : `anh-cuoi-${String(index + 1).padStart(3, "0")}.jpg`;
                 blob
-                  .then((b) => savePhoto(b, `anh-cuoi-${String(index + 1).padStart(3, "0")}.jpg`))
+                  .then((b) => savePhoto(b, saveName))
                   .catch(() => window.open(current, "_blank"))
                   .finally(() => setSaving(false));
               }}
-              className="absolute top-4 left-4 flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 font-vietnam text-sm text-white disabled:opacity-60"
+              className="absolute top-4 left-4 flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-md px-4 py-2 font-vietnam text-sm text-white disabled:opacity-60 hover:bg-white/30 transition-colors"
             >
               <FaDownload />
               {saving ? "Đang tải..." : "Lưu ảnh"}
@@ -156,7 +175,7 @@ const AlbumGrid = ({ photos, fullPhotos, pageSize, cols = 2 }: AlbumGridProps) =
               type="button"
               onClick={close}
               aria-label="Đóng"
-              className="absolute top-4 right-4 p-3 text-white/90 text-2xl"
+              className="absolute top-4 right-4 p-3 text-white/90 text-2xl hover:text-white transition-colors"
             >
               <FaTimes />
             </button>
@@ -169,7 +188,7 @@ const AlbumGrid = ({ photos, fullPhotos, pageSize, cols = 2 }: AlbumGridProps) =
                     step(-1);
                   }}
                   aria-label="Ảnh trước"
-                  className="absolute left-2 top-1/2 -translate-y-1/2 p-3 text-white/80 text-2xl"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 p-3 text-white/80 text-2xl hover:text-white transition-colors"
                 >
                   <FaChevronLeft />
                 </button>
@@ -180,7 +199,7 @@ const AlbumGrid = ({ photos, fullPhotos, pageSize, cols = 2 }: AlbumGridProps) =
                     step(1);
                   }}
                   aria-label="Ảnh sau"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-3 text-white/80 text-2xl"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-3 text-white/80 text-2xl hover:text-white transition-colors"
                 >
                   <FaChevronRight />
                 </button>
