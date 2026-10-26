@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FaImages, FaUsers, FaTimes, FaCheck } from "react-icons/fa";
+import { FaImages, FaUser, FaTimes, FaCheck } from "react-icons/fa";
 import AlbumGrid from "./AlbumGrid";
 
 // Album gốc trên Google Photos (ảnh do thợ ảnh chụp trong lễ ăn hỏi, lễ cưới và đón dâu)
@@ -22,14 +22,16 @@ export interface FaceGroup {
 
 interface FacesData {
   version: string;
+  description?: string;
   totalPhotos: number;
+  totalGroups: number;
   groups: FaceGroup[];
 }
 
 const WeddingPhotos = () => {
   const [urls, setUrls] = useState<string[]>([]);
-  const [faceGroups, setFaceGroups] = useState<FaceGroup[]>([]);
-  const [selectedGroup, setSelectedGroup] = useState<FaceGroup | null>(null);
+  const [people, setPeople] = useState<FaceGroup[]>([]);
+  const [selectedPerson, setSelectedPerson] = useState<FaceGroup | null>(null);
 
   // Tải danh sách tất cả ảnh cưới
   useEffect(() => {
@@ -39,13 +41,13 @@ const WeddingPhotos = () => {
       .catch(() => {});
   }, []);
 
-  // Tải dữ liệu nhận dạng khuôn mặt AI
+  // Tải dữ liệu nhận dạng khuôn mặt từng cá nhân (đã loại trừ Cô dâu & Chú rể)
   useEffect(() => {
     fetch(`${base}/wedding/faces.json`)
       .then((r) => r.json())
       .then((data: FacesData) => {
         if (data && Array.isArray(data.groups)) {
-          setFaceGroups(data.groups);
+          setPeople(data.groups);
         }
       })
       .catch(() => {});
@@ -56,53 +58,53 @@ const WeddingPhotos = () => {
   // Danh sách toàn bộ 895 ảnh: 001.jpg, 002.jpg, ...
   const allFiles = urls.map((_, i) => `${String(i + 1).padStart(3, "0")}.jpg`);
 
-  // Danh sách ảnh đang hiển thị (toàn bộ hoặc theo nhân vật được chọn)
-  const currentFiles = selectedGroup ? selectedGroup.photos : allFiles;
+  // Danh sách ảnh đang hiển thị (toàn bộ hoặc theo người được chọn)
+  const currentFiles = selectedPerson ? selectedPerson.photos : allFiles;
 
   return (
     <div>
-      {/* KHỐI NHẬN DIỆN KHUÔN MẶT BẰNG AI */}
-      {faceGroups.length > 0 && (
-        <div className="mb-6 rounded-2xl bg-white/70 p-4 border border-sage/25 shadow-sm backdrop-blur-sm">
-          <div className="flex items-center justify-between mb-3 px-1">
+      {/* KHỐI NHẬN DIỆN KHUÔN MẶT TỪNG NGƯỜI (AI FACE ID) */}
+      {people.length > 0 && (
+        <div className="mb-6 rounded-2xl bg-white/75 p-4 border border-sage/25 shadow-sm backdrop-blur-sm">
+          <div className="flex items-center justify-between mb-2 px-1">
             <div className="flex items-center gap-2">
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-sage/20 text-sage text-xs">
-                <FaUsers />
+                <FaUser />
               </span>
               <h3 className="font-playfair text-base font-semibold text-[#232323]">
                 Tìm ảnh theo người
               </h3>
             </div>
             <span className="rounded-full bg-sage/15 px-2.5 py-0.5 text-[11px] font-vietnam font-medium text-sage">
-              AI Face ID
+              AI Face ID ({people.length} người)
             </span>
           </div>
 
           <p className="text-xs font-vietnam text-[#6E6E6E] mb-3 px-1">
-            Bấm vào ảnh đại diện để xem toàn bộ khoảnh khắc của nhân vật đó:
+            Nhận diện từng khách mời (đã tự động lọc bỏ cô dâu & chú rể). Bấm vào khuôn mặt để xem toàn bộ ảnh có mặt người đó:
           </p>
 
-          {/* Dải avatar cuộn ngang */}
+          {/* Dải avatar từng người cuộn ngang */}
           <div className="flex gap-3 overflow-x-auto pb-2 pt-1 px-1 scroll-smooth no-scrollbar">
             {/* Nút "Tất cả" */}
             <button
               type="button"
-              onClick={() => setSelectedGroup(null)}
+              onClick={() => setSelectedPerson(null)}
               className="group flex flex-col items-center flex-shrink-0 transition-transform active:scale-95"
             >
               <div
                 className={`relative flex h-14 w-14 items-center justify-center rounded-full border-2 transition-all ${
-                  selectedGroup === null
+                  selectedPerson === null
                     ? "border-sage bg-sage/20 ring-2 ring-sage/40 ring-offset-2"
                     : "border-sage/40 bg-white/80 hover:border-sage/70"
                 }`}
               >
                 <FaImages
                   className={`text-lg transition-colors ${
-                    selectedGroup === null ? "text-sage" : "text-[#7D7D7D]"
+                    selectedPerson === null ? "text-sage" : "text-[#7D7D7D]"
                   }`}
                 />
-                {selectedGroup === null && (
+                {selectedPerson === null && (
                   <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-sage text-white text-[9px]">
                     <FaCheck />
                   </span>
@@ -110,7 +112,7 @@ const WeddingPhotos = () => {
               </div>
               <span
                 className={`mt-1.5 text-xs font-vietnam transition-colors ${
-                  selectedGroup === null
+                  selectedPerson === null
                     ? "font-semibold text-sage"
                     : "text-[#555555]"
                 }`}
@@ -122,15 +124,15 @@ const WeddingPhotos = () => {
               </span>
             </button>
 
-            {/* Các nhóm khuôn mặt nhân vật */}
-            {faceGroups.map((group) => {
-              const isSelected = selectedGroup?.id === group.id;
+            {/* Avatar từng cá nhân được AI nhận dạng */}
+            {people.map((person) => {
+              const isSelected = selectedPerson?.id === person.id;
               return (
                 <button
-                  key={group.id}
+                  key={person.id}
                   type="button"
                   onClick={() =>
-                    setSelectedGroup(isSelected ? null : group)
+                    setSelectedPerson(isSelected ? null : person)
                   }
                   className="group flex flex-col items-center flex-shrink-0 transition-transform active:scale-95"
                 >
@@ -138,13 +140,13 @@ const WeddingPhotos = () => {
                     className={`relative h-14 w-14 rounded-full overflow-hidden border-2 transition-all ${
                       isSelected
                         ? "border-sage ring-2 ring-sage/40 ring-offset-2 scale-105"
-                        : "border-white/80 hover:border-sage/50"
+                        : "border-white/90 hover:border-sage/50"
                     }`}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={`${base}${group.avatar}`}
-                      alt={group.name}
+                      src={`${base}${person.avatar}`}
+                      alt={person.name}
                       className="h-full w-full object-cover"
                       loading="lazy"
                     />
@@ -160,12 +162,12 @@ const WeddingPhotos = () => {
                         ? "font-semibold text-sage"
                         : "text-[#444444]"
                     }`}
-                    title={group.name}
+                    title={person.name}
                   >
-                    {group.name}
+                    {person.name}
                   </span>
                   <span className="text-[10px] font-quicksand text-[#888888]">
-                    {group.count} ảnh
+                    {person.count} ảnh
                   </span>
                 </button>
               );
@@ -173,20 +175,20 @@ const WeddingPhotos = () => {
           </div>
 
           {/* Thanh trạng thái khi đang lọc */}
-          {selectedGroup && (
+          {selectedPerson && (
             <div className="mt-3 flex items-center justify-between rounded-xl bg-sage/10 px-3 py-2 text-xs font-vietnam text-[#333]">
               <div className="flex items-center gap-1.5">
-                <span className="text-sage font-medium">Đang lọc:</span>
+                <span className="text-sage font-medium">Đang xem ảnh của:</span>
                 <span className="font-semibold text-[#222]">
-                  {selectedGroup.name}
+                  {selectedPerson.name}
                 </span>
                 <span className="text-[#666]">
-                  ({selectedGroup.count} ảnh)
+                  ({selectedPerson.count} ảnh)
                 </span>
               </div>
               <button
                 type="button"
-                onClick={() => setSelectedGroup(null)}
+                onClick={() => setSelectedPerson(null)}
                 className="flex items-center gap-1 text-sage hover:text-brown font-medium transition-colors"
               >
                 <FaTimes className="text-[11px]" />
@@ -199,7 +201,7 @@ const WeddingPhotos = () => {
 
       {/* LƯỚI ẢNH ALBUM */}
       <AlbumGrid
-        key={selectedGroup ? selectedGroup.id : "all"}
+        key={selectedPerson ? selectedPerson.id : "all"}
         photos={currentFiles.map((f) => `${base}/wedding-photos/thumb/${f}`)}
         fullPhotos={currentFiles.map((f) => `${base}/wedding-photos/full/${f}`)}
         pageSize={24}
