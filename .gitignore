@@ -39,3 +39,7 @@ next-env.d.ts
 
 # ảnh lễ cưới tải về server, không đưa vào git
 /photos
+*.pkl
+scripts/models/*.onnx
+scripts/face_records_cache.pkl
+
