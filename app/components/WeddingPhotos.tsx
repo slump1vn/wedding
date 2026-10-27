@@ -4,10 +4,6 @@ import { useEffect, useState } from "react";
 import { FaImages, FaUser, FaTimes, FaCheck } from "react-icons/fa";
 import AlbumGrid from "./AlbumGrid";
 
-// Album gốc trên Google Photos (ảnh do thợ ảnh chụp trong lễ ăn hỏi, lễ cưới và đón dâu)
-export const GOOGLE_PHOTOS_ALBUM =
-  "https://photos.google.com/share/AF1QipOOOJuBBltiHAWZk7srf1Qy3EuYUrJgSVTc4lnFhGhJ0mNpMjbFBXb7St0CC4NghA?key=ZWM1cEljdVBGSm02UGtzNkJGdjkya19KamRndzBB";
-
 const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export interface FaceGroup {
@@ -200,16 +196,6 @@ const WeddingPhotos = () => {
         pageSize={24}
         cols={3}
       />
-
-      <a
-        href={GOOGLE_PHOTOS_ALBUM}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-4 flex items-center justify-center gap-2 font-vietnam text-sm text-sage underline transition-opacity hover:opacity-80"
-      >
-        <FaImages />
-        Xem và tải ảnh gốc trên Google Photos
-      </a>
     </div>
   );
 };
